@@ -70,10 +70,48 @@ void Chassis(void) {
 
 
 
-
- void balance(void)
+float target_roll=-9.0f; // 目标横滚角
+ void balance_stand(void)
  {
-  
+  // static uint8_t balance_initialized = 0;
+  static float last_roll_error = 0.0f;
+
+  const float Kp_balance = 35.0f;
+  const float Kd_balance = 220.0f;
+  const float fall_limit = 35.0f;
+  const int max_balance_pwm = 850;
+  const int min_effective_pwm = 20;
+
+  // if (!balance_initialized) {
+  //   target_pitch = wit_data.pitch;
+  //   last_pitch_error = 0.0f;
+  //   balance_initialized = 1;
+  // }
+
+  float roll_error = wit_data.roll - target_roll;
+  float roll_error_change = roll_error - last_roll_error;
+  last_roll_error = roll_error;
+
+  if (roll_error > fall_limit || roll_error < -fall_limit) {
+    TB6612_Motor_Stop();
+    return;
+  }
+
+  int balance_pwm = (int)(Kp_balance * roll_error + Kd_balance * roll_error_change);
+
+  if (balance_pwm > max_balance_pwm) {
+    balance_pwm = max_balance_pwm;
+  } else if (balance_pwm < -max_balance_pwm) {
+    balance_pwm = -max_balance_pwm;
+  }
+
+  if (balance_pwm > min_effective_pwm) {
+    Left_Control(1, balance_pwm);
+    Right_Control(1, balance_pwm);
+  } else if (balance_pwm < -min_effective_pwm) {
+    Left_Control(0, -balance_pwm);
+    Right_Control(0, -balance_pwm);
+  } 
  }
 
 

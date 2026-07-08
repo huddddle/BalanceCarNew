@@ -85,7 +85,7 @@ void AssignmentChoose(void)
 
 void assignment1(void) 
 {
-  balance();
+  balance_stand();
 }
 
 void assignment2(void) {

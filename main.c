@@ -84,23 +84,23 @@ int main(void)
   OLED_ShowString(0, 6, (uint8_t *)"Status:", 8);
 
   while (1) 
-  {    
+  {
     // 显示 assignmentFlag
     sprintf((char *)oled_buffer, "%d", turnCompleted);
     OLED_ShowString(9 * 8, 0, oled_buffer, 16);
-    
+
     // 显示 CrossingFlag
     sprintf((char *)oled_buffer, "%d", turnFlag);
     OLED_ShowString(9 * 8, 2, oled_buffer, 16);
-    
+
     // 显示 CrossingFlag (格式化版本)
     sprintf((char *)oled_buffer, "%-6.1f", wit_data.yaw);
     OLED_ShowString(9 * 8, 4, oled_buffer, 16);
 
     // sprintf((char *)oled_buffer, "%-6.4f", wit_data.yaw);
     // OLED_ShowString(9 * 8, 6, oled_buffer, 16);
-
-    assignment_function[assignmentFlag]();
+    balance_stand();
+    // assignment_function[assignmentFlag]();
     // Left_Control(1, 300);
     // Right_Control(1, 300);
   }
