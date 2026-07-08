@@ -83,9 +83,16 @@ void AssignmentChoose(void)
   return;
 }
 
+int Assig1=0;
 void assignment1(void) 
 {
-  balance_stand();
+  if(!Assig1)
+  {
+      DL_TimerA_startCounter(TIMER_Balance_INST);
+      Assig1++;
+  }
+  // balance_stand();
+
 }
 
 void assignment2(void) {

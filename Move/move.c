@@ -71,7 +71,7 @@ void Chassis(void) {
 
 
 
-#if defined(TIMER_Balance_INST_IRQHandler)
+
 void TIMER_Balance_INST_IRQHandler(void)
 {
   switch (DL_TimerA_getPendingInterrupt(TIMER_Balance_INST)) {
@@ -90,7 +90,7 @@ void TIMER_Balance_INST_IRQHandler(void)
       break;
   }
 }
-#endif
+
 
 
 
@@ -161,7 +161,6 @@ int balance_turn(float target_yaw)
 void BalanceTimerInit(void)
 {
   NVIC_EnableIRQ(TIMER_Balance_INST_INT_IRQN);
-  DL_TimerA_startCounter(TIMER_Balance_INST);
 }
 
 

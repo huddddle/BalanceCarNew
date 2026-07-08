@@ -535,7 +535,7 @@ static const DL_TimerA_ClockConfig gTIMER_BalanceClockConfig = {
  */
 static const DL_TimerA_TimerConfig gTIMER_BalanceTimerConfig = {
     .period     = TIMER_Balance_INST_LOAD_VALUE,
-    .timerMode  = DL_TIMER_TIMER_MODE_ONE_SHOT,
+    .timerMode  = DL_TIMER_TIMER_MODE_PERIODIC_UP,
     .startTimer = DL_TIMER_STOP,
 };
 
@@ -546,8 +546,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_TIMER_Balance_init(void) {
 
     DL_TimerA_initTimerMode(TIMER_Balance_INST,
         (DL_TimerA_TimerConfig *) &gTIMER_BalanceTimerConfig);
-    DL_TimerA_enableInterrupt(TIMER_Balance_INST , DL_TIMERA_INTERRUPT_REPC_EVENT |
-		DL_TIMERA_INTERRUPT_ZERO_EVENT);
+    DL_TimerA_enableInterrupt(TIMER_Balance_INST , DL_TIMERA_INTERRUPT_ZERO_EVENT);
     DL_TimerA_enableClock(TIMER_Balance_INST);
 
 

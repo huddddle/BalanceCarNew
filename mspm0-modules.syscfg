@@ -248,10 +248,12 @@ TIMER2.timerClkPrescale = 80;
 TIMER2.timerMode        = "ONE_SHOT_UP";
 TIMER2.timerPeriod      = "40 ms";
 
-TIMER3.$name       = "TIMER_Balance";
-TIMER3.timerPeriod = "5 ms";
-TIMER3.timerClkDiv = 8;
-TIMER3.interrupts  = ["REPC","ZERO"];
+TIMER3.$name              = "TIMER_Balance";
+TIMER3.timerPeriod        = "5 ms";
+TIMER3.timerClkDiv        = 8;
+TIMER3.timerMode          = "PERIODIC_UP";
+TIMER3.interrupts         = ["ZERO"];
+TIMER3.peripheral.$assign = "TIMA0";
 
 UART1.$name                            = "UART_WIT";
 UART1.targetBaudRate                   = 115200;
@@ -316,6 +318,5 @@ GPIO9.associatedPins[0].pin.$suggestSolution     = "PB17";
 PWM3.peripheral.$suggestSolution                 = "TIMG8";
 TIMER1.peripheral.$suggestSolution               = "TIMG6";
 TIMER2.peripheral.$suggestSolution               = "TIMG0";
-TIMER3.peripheral.$suggestSolution               = "TIMA0";
 UART1.peripheral.$suggestSolution                = "UART0";
 UART1.DMA_CHANNEL_RX.peripheral.$suggestSolution = "DMA_CH0";

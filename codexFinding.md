@@ -70,3 +70,28 @@ upright_pwm = Kp_up * (wit_data.roll - target_roll) + Kd_up * roll_gyro;
 - 当前 `balance_stand()` 已经通过 `output_deadband` 让小 PWM 归零，并在零输出时调用 `TB6612_Motor_Stop()`，避免保留上一次 PWM。
 - 速度环建议 20Hz 左右执行，不要和 200Hz 直立环同频；编码器速度需要一点采样窗口，否则量化噪声会很明显。
 - 位置式 PID 的积分项必须有限幅，尤其速度环打开后，否则积分饱和会让小车突然冲出去。
+
+## TIMER_Balance 不进中断的排查记录
+
+这次只做代码排查，没有直接修改控制代码。当前最可疑的问题不是 SysConfig 没生成定时器，也不是中断函数名字写错，而是 **NVIC 没有真正打开 `TIMER_Balance_INST_INT_IRQN`**。
+
+我看到的关键事实：
+
+1. `mspm0-modules.syscfg` 里 `TIMER_Balance` 已经配置到 `TIMA0`，周期是 `5 ms`，模式是 `PERIODIC_UP`，中断源是 `ZERO`，并且 `timerStartTimer = true`。
+2. `Debug/ti_msp_dl_config.h` 里生成的宏是：`TIMER_Balance_INST = TIMA0`，`TIMER_Balance_INST_IRQHandler = TIMA0_IRQHandler`，`TIMER_Balance_INST_INT_IRQN = TIMA0_INT_IRQn`。
+3. `Debug/ti_msp_dl_config.c` 里确实调用了 `DL_TimerA_enableInterrupt(TIMER_Balance_INST, DL_TIMERA_INTERRUPT_ZERO_EVENT)`，所以外设内部的 ZERO 中断源已经打开。
+4. `Move/move.c` 里写的是 `void TIMER_Balance_INST_IRQHandler(void)`，这个名字会被宏替换成真正的 `TIMA0_IRQHandler`，工程里也没有搜索到第二个 `TIMA0_IRQHandler` 冲突。
+5. `Move/move.c` 里有 `BalanceTimerInit()`，它里面才有 `NVIC_EnableIRQ(TIMER_Balance_INST_INT_IRQN)`，但目前没有看到 `main.c` 或 `assignment1()` 调用它。
+6. 当前 `assignment1()` 只调用了 `DL_TimerA_startCounter(TIMER_Balance_INST)`，这只能启动/重启定时器计数，不能打开 NVIC，所以 CPU 仍然不会跳进 ISR。
+
+因此当前最可能的原因是：**定时器已经在计数，ZERO 中断标志也可能已经产生，但 `TIMA0_INT_IRQn` 在 NVIC 侧没有 enable，CPU 不会进入 `TIMA0_IRQHandler`。**
+
+建议检查顺序：
+
+1. 先在 `BalanceTimerInit()` 里打断点，确认它有没有被调用。如果没有被调用，那就是首要问题。
+2. 再在 `assignment1()` 里打断点。现在它只 start counter，不 enable NVIC；如果你暂时只在任务 1 里启用平衡定时器，应该让任务 1 调用完整初始化函数，而不是只调用 `DL_TimerA_startCounter()`。
+3. 在调试器里观察 `TIMER_Balance_INST_INT_IRQN` 对应的 NVIC enable 位。没开的话，`TIMA0_IRQHandler` 不会进。
+4. 如果 NVIC 已经打开但仍不进，再看 `TIMER_Balance_INST->CPU_INT` 相关寄存器：`IMASK` 是否有 ZERO，`RIS/MIS` 是否出现 ZERO 标志，`IIDX` 是否能读到 `DL_TIMERA_IIDX_ZERO`。
+5. 如果 `IIDX` 有 ZERO 但断点不进 ISR，再回头检查最终 map 文件里是否真的有 `TIMA0_IRQHandler` 符号来自 `Move/move.o`。
+
+还有一个结构上的小提醒：当前 `TIMER_Balance` 已经是 `PERIODIC_UP`，不是之前的 one-shot，所以 ISR 里理论上不需要每次 `DL_TimerA_startCounter(TIMER_Balance_INST)`。这不是“不进中断”的主要原因，但后续建议把“周期定时器”和“单次重启定时器”的逻辑统一，避免重复 start 带来不必要的不确定性。

@@ -68,6 +68,7 @@ int main(void)
   // Servo_Init();//云台初始化
   Speed_Init();// 定时器和编码器测速部分
   Ultrasonic_Init();
+  BalanceTimerInit();
 
   // 电机转速控制
   Left_Control(1, 0);
@@ -99,8 +100,8 @@ int main(void)
 
     // sprintf((char *)oled_buffer, "%-6.4f", wit_data.yaw);
     // OLED_ShowString(9 * 8, 6, oled_buffer, 16);
-    balance_stand();
-    // assignment_function[assignmentFlag]();
+    // balance_stand();
+    assignment_function[assignmentFlag]();
     // Left_Control(1, 300);
     // Right_Control(1, 300);
   }
