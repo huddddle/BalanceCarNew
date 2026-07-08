@@ -76,10 +76,10 @@ Drivers/MSPM0/interrupt.o: ../Drivers/MSPM0/interrupt.c \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
  ../Drivers/MSPM0/interrupt.h ../Drivers/MSPM0/clock.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MPU6050/mpu6050.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/global.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MPU6050/mpu6050.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h:
@@ -156,7 +156,7 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
 ../Drivers/MSPM0/interrupt.h:
 ../Drivers/MSPM0/clock.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MPU6050/mpu6050.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/global.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MPU6050/mpu6050.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h:

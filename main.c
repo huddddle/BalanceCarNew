@@ -101,6 +101,7 @@ int main(void)
     // OLED_ShowString(9 * 8, 6, oled_buffer, 16);
 
     assignment_function[assignmentFlag]();
-
+    // Left_Control(1, 300);
+    // Right_Control(1, 300);
   }
 }

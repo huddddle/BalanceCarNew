@@ -1,8 +1,8 @@
 # FIXED
 
 UART/K230.o: ../UART/K230.c \
- C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h \
- ../UART/K230.h C:/Users/ROG/workspace_ccstheia/BigCar/global.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h \
+ ../UART/K230.h C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h \
  ti_msp_dl_config.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h \
@@ -77,10 +77,10 @@ UART/K230.o: ../UART/K230.c \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/AssignmentChoose/assignment.h
-C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h:
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/AssignmentChoose/assignment.h
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h:
 ../UART/K230.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/global.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h:
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h:
@@ -155,4 +155,4 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_vref.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/AssignmentChoose/assignment.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/AssignmentChoose/assignment.h:

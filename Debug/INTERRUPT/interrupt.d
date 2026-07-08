@@ -1,11 +1,11 @@
 # FIXED
 
 INTERRUPT/.o: ../INTERRUPT/interrupt.c ../INTERRUPT/interrupt.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/SPEED/speed.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/global.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/PID/pid.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/WIT/wit.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SPEED/speed.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID/pid.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h \
  ti_msp_dl_config.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h \
@@ -80,15 +80,15 @@ INTERRUPT/.o: ../INTERRUPT/interrupt.c ../INTERRUPT/interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/TURN/turn.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Motor/Motor.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Move/move.h
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/turn.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Move/move.h
 ../INTERRUPT/interrupt.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/SPEED/speed.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/global.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/PID/pid.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/WIT/wit.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SPEED/speed.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID/pid.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h:
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h:
@@ -163,6 +163,6 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_vref.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/TURN/turn.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Motor/Motor.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Move/move.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/turn.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Move/move.h:

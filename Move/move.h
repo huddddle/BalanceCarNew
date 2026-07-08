@@ -29,7 +29,7 @@ enum Assignment3State {
   PHASE_TRACKING_AGAIN = 2         // 再次循迹
 };
 static uint8_t assignment3_state = PHASE_TRACKING_HALF_SEC;
-
+ void balance(void);
 extern uint8_t shapeFlag; // 0:圆形, 1:正方形, 2:三角形, 3:椭圆形
 
 #endif

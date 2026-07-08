@@ -76,8 +76,8 @@ Drivers/MSPM0/clock.o: ../Drivers/MSPM0/clock.c \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
  ../Drivers/MSPM0/clock.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/global.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h:
@@ -153,5 +153,5 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
 ../Drivers/MSPM0/clock.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/global.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h:

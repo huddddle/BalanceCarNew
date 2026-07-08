@@ -31,6 +31,15 @@
                 "name": "BigCar",
                 "resourceId": "/BigCar"
             }
+        },
+        {
+            "name": "BalanceCarNew",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "BalanceCarNew",
+                "resourceId": "/BalanceCarNew"
+            }
         }
     ]
 }

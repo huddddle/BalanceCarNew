@@ -78,7 +78,7 @@ Drivers/OLED_Software_I2C/oled_software_i2c.o: \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
  ../Drivers/OLED_Software_I2C/oledfont.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MSPM0/clock.h
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0/clock.h
 ../Drivers/OLED_Software_I2C/oled_software_i2c.h:
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
@@ -155,4 +155,4 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
 ../Drivers/OLED_Software_I2C/oledfont.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MSPM0/clock.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0/clock.h:

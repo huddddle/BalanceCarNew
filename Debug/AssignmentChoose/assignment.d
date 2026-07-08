@@ -1,7 +1,7 @@
 # FIXED
 
 AssignmentChoose/assignment.o: ../AssignmentChoose/assignment.c \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Motor/Motor.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h \
  ti_msp_dl_config.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h \
@@ -76,27 +76,27 @@ AssignmentChoose/assignment.o: ../AssignmentChoose/assignment.c \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/global.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Move/move.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/main.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MSPM0/clock.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MPU6050/mpu6050.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Software_I2C/oled_software_i2c.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Hardware_I2C/oled_hardware_i2c.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Software_SPI/oled_software_spi.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Hardware_SPI/oled_hardware_spi.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Ultrasonic_Capture/ultrasonic_capture.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Ultrasonic_GPIO/ultrasonic_gpio.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/WIT/wit.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/PID/pid.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/SERVO/servo.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/SPEED/speed.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/TURN/turn.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Move/move.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/main.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0/clock.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MPU6050/mpu6050.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Software_I2C/oled_software_i2c.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Hardware_I2C/oled_hardware_i2c.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Software_SPI/oled_software_spi.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Hardware_SPI/oled_hardware_spi.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Ultrasonic_Capture/ultrasonic_capture.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Ultrasonic_GPIO/ultrasonic_gpio.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID/pid.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SERVO/servo.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SPEED/speed.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/turn.h \
  ../AssignmentChoose/assignment.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Bluetooth/bluetooth.h
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Motor/Motor.h:
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Bluetooth/bluetooth.h
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h:
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h:
@@ -171,23 +171,23 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_vref.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/global.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Move/move.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/main.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MSPM0/clock.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/MPU6050/mpu6050.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Software_I2C/oled_software_i2c.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Hardware_I2C/oled_hardware_i2c.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Software_SPI/oled_software_spi.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/OLED_Hardware_SPI/oled_hardware_spi.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Ultrasonic_Capture/ultrasonic_capture.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Ultrasonic_GPIO/ultrasonic_gpio.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/WIT/wit.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/PID/pid.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/SERVO/servo.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/SPEED/speed.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/TURN/turn.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Move/move.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/main.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0/clock.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MPU6050/mpu6050.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Software_I2C/oled_software_i2c.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Hardware_I2C/oled_hardware_i2c.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Software_SPI/oled_software_spi.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Hardware_SPI/oled_hardware_spi.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Ultrasonic_Capture/ultrasonic_capture.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Ultrasonic_GPIO/ultrasonic_gpio.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/BNO08X_UART_RVC/bno08x_uart_rvc.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID/pid.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SERVO/servo.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SPEED/speed.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/turn.h:
 ../AssignmentChoose/assignment.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Bluetooth/bluetooth.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Bluetooth/bluetooth.h:

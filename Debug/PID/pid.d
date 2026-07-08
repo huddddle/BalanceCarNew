@@ -1,7 +1,7 @@
 # FIXED
 
 PID/pid.o: ../PID/pid.c ../PID/pid.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/WIT/wit.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h \
  ti_msp_dl_config.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h \
@@ -76,11 +76,11 @@ PID/pid.o: ../PID/pid.c ../PID/pid.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h \
  F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/global.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h \
- C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Motor/Motor.h
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h
 ../PID/pid.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/WIT/wit.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h:
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/DeviceFamily.h:
@@ -155,6 +155,6 @@ F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_vref.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/dl_wwdt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_interrupt.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/m0p/dl_systick.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/global.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/INTERRUPT/interrupt.h:
-C:/Users/ROG/workspace_ccstheia/BigCar/Drivers/Motor/Motor.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/global.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/interrupt.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h:

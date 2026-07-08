@@ -85,31 +85,7 @@ void AssignmentChoose(void)
 
 void assignment1(void) 
 {
-  if (turnFlag > 4 || turnFlag<0 ) 
-  {
-    zeroparameter();
-    backwords();
-    mspm0_delay_ms(500);
-    stop();
-    LightAndSound();
-    return;
-  }
-  if (LeftTurnFlag==0&&RightTurnFlag==0&&TurnOverFlag==0)
-  {
-    Tracking();
-  }
-  else if(LeftTurnFlag==1)
-  {
-    Left_Turn(88);
-  }
-  else if(RightTurnFlag==1)
-  {
-    Right_Turn(88);
-  }
-  else if(TurnOverFlag==1)
-  {
-    Left_Turn(181);
-  }
+  balance();
 }
 
 void assignment2(void) {
@@ -188,7 +164,31 @@ void assignment4(void)
 
 void assignment5(void) 
 {
-
+  if (turnFlag > 4 || turnFlag<0 ) 
+  {
+    zeroparameter();
+    backwords();
+    mspm0_delay_ms(500);
+    stop();
+    LightAndSound();
+    return;
+  }
+  if (LeftTurnFlag==0&&RightTurnFlag==0&&TurnOverFlag==0)
+  {
+    Tracking();
+  }
+  else if(LeftTurnFlag==1)
+  {
+    Left_Turn(88);
+  }
+  else if(RightTurnFlag==1)
+  {
+    Right_Turn(88);
+  }
+  else if(TurnOverFlag==1)
+  {
+    Left_Turn(181);
+  }
 }
 
 // 如果一直没有任务就空转
