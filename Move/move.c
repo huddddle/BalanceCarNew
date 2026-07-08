@@ -71,6 +71,29 @@ void Chassis(void) {
 
 
 
+#if defined(TIMER_Balance_INST_IRQHandler)
+void TIMER_Balance_INST_IRQHandler(void)
+{
+  switch (DL_TimerA_getPendingInterrupt(TIMER_Balance_INST)) {
+    case DL_TIMERA_IIDX_ZERO:
+      // TIMER_Balance 配置为 5ms 单次定时器。
+      // 每次 ZERO 事件执行一次直立环，再重启定时器，形成 200Hz 控制周期。
+      balance_stand();
+      DL_TimerA_startCounter(TIMER_Balance_INST);
+      break;
+
+    case DL_TIMERA_IIDX_REPEAT_COUNT:
+      // SysConfig 当前也打开了 REPC 中断源；这里读取后忽略，避免同一周期重复运行直立环。
+      break;
+
+    default:
+      break;
+  }
+}
+#endif
+
+
+
 float target_roll=-9.0f; // 目标横滚角
  void balance_stand(void)
  {
@@ -140,27 +163,6 @@ void BalanceTimerInit(void)
   NVIC_EnableIRQ(TIMER_Balance_INST_INT_IRQN);
   DL_TimerA_startCounter(TIMER_Balance_INST);
 }
-
-#if defined(TIMER_Balance_INST_IRQHandler)
-void TIMER_Balance_INST_IRQHandler(void)
-{
-  switch (DL_TimerA_getPendingInterrupt(TIMER_Balance_INST)) {
-    case DL_TIMERA_IIDX_ZERO:
-      // TIMER_Balance 配置为 5ms 单次定时器。
-      // 每次 ZERO 事件执行一次直立环，再重启定时器，形成 200Hz 控制周期。
-      balance_stand();
-      DL_TimerA_startCounter(TIMER_Balance_INST);
-      break;
-
-    case DL_TIMERA_IIDX_REPEAT_COUNT:
-      // SysConfig 当前也打开了 REPC 中断源；这里读取后忽略，避免同一周期重复运行直立环。
-      break;
-
-    default:
-      break;
-  }
-}
-#endif
 
 
 
