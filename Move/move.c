@@ -6,6 +6,7 @@
 #include "clock.h"
 #include "interrupt.h"
 #include "assignment.h"
+#include "pid.h"
 
 
 #define turn_threshold 2
@@ -73,46 +74,93 @@ void Chassis(void) {
 float target_roll=-9.0f; // 目标横滚角
  void balance_stand(void)
  {
-  // static uint8_t balance_initialized = 0;
-  static float last_roll_error = 0.0f;
-
-  const float Kp_balance = 35.0f;
-  const float Kd_balance = 220.0f;
+  static LocaPID_t upright_pid = {{38.0f, 0.0f, 220.0f}, 0.0f, 0.0f, 0.0f, 850.0f, 20.0f};
   const float fall_limit = 35.0f;
-  const int max_balance_pwm = 850;
-  const int min_effective_pwm = 20;
-
-  // if (!balance_initialized) {
-  //   target_pitch = wit_data.pitch;
-  //   last_pitch_error = 0.0f;
-  //   balance_initialized = 1;
-  // }
 
   float roll_error = wit_data.roll - target_roll;
-  float roll_error_change = roll_error - last_roll_error;
-  last_roll_error = roll_error;
 
   if (roll_error > fall_limit || roll_error < -fall_limit) {
+    Loca_PID_Reset(&upright_pid);
     TB6612_Motor_Stop();
     return;
   }
 
-  int balance_pwm = (int)(Kp_balance * roll_error + Kd_balance * roll_error_change);
+  int balance_pwm = (int)Loca_PID(&upright_pid, roll_error);
 
-  if (balance_pwm > max_balance_pwm) {
-    balance_pwm = max_balance_pwm;
-  } else if (balance_pwm < -max_balance_pwm) {
-    balance_pwm = -max_balance_pwm;
-  }
-
-  if (balance_pwm > min_effective_pwm) {
+  if (balance_pwm > 0) {
     Left_Control(1, balance_pwm);
     Right_Control(1, balance_pwm);
-  } else if (balance_pwm < -min_effective_pwm) {
+  } else if (balance_pwm < 0) {
     Left_Control(0, -balance_pwm);
     Right_Control(0, -balance_pwm);
-  } 
+  } else {
+    TB6612_Motor_Stop();
+  }
  }
+
+static int balance_get_latest_speed(int speed_buffer[], int index)
+{
+  if (index <= 0) {
+    return 0;
+  }
+  if (index > 999) {
+    index = 999;
+  }
+  return speed_buffer[index - 1];
+}
+
+int balance_speed(int target_speed)
+{
+  static LocaPID_t speed_pid = {{0.0f, 0.0f, 0.0f}, 0.0f, 0.0f, 5000.0f, 300.0f, 0.0f};
+
+  int left_speed = balance_get_latest_speed(SpeLeft, l);
+  int right_speed = balance_get_latest_speed(SpeRight, r);
+  float current_speed = ((float)left_speed + (float)right_speed) * 0.5f;
+  float speed_error = current_speed - (float)target_speed;
+
+  speed_pid.gain = SpeedPID;
+
+  return (int)Loca_PID(&speed_pid, speed_error);
+}
+
+int balance_turn(float target_yaw)
+{
+  static LocaPID_t turn_pid = {{0.0f, 0.0f, 0.0f}, 0.0f, 0.0f, 0.0f, 300.0f, 0.0f};
+
+  float yaw_error = target_yaw - wit_data.yaw;
+  RangeLimite(&yaw_error, 180.0f);
+
+  turn_pid.gain = TurnPID;
+
+  return (int)Loca_PID(&turn_pid, yaw_error);
+}
+
+void BalanceTimerInit(void)
+{
+  NVIC_EnableIRQ(TIMER_Balance_INST_INT_IRQN);
+  DL_TimerA_startCounter(TIMER_Balance_INST);
+}
+
+#if defined(TIMER_Balance_INST_IRQHandler)
+void TIMER_Balance_INST_IRQHandler(void)
+{
+  switch (DL_TimerA_getPendingInterrupt(TIMER_Balance_INST)) {
+    case DL_TIMERA_IIDX_ZERO:
+      // TIMER_Balance 配置为 5ms 单次定时器。
+      // 每次 ZERO 事件执行一次直立环，再重启定时器，形成 200Hz 控制周期。
+      balance_stand();
+      DL_TimerA_startCounter(TIMER_Balance_INST);
+      break;
+
+    case DL_TIMERA_IIDX_REPEAT_COUNT:
+      // SysConfig 当前也打开了 REPC 中断源；这里读取后忽略，避免同一周期重复运行直立环。
+      break;
+
+    default:
+      break;
+  }
+}
+#endif
 
 
 

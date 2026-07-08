@@ -19,6 +19,9 @@ int ModuleTracking(void);
 void parking(void);
 void backwords(void);
  void balance_stand(void);
+int balance_speed(int target_speed);
+int balance_turn(float target_yaw);
+void BalanceTimerInit(void);
  
 // 定义全局计时器变量
 static SoftTimer_t assignment3timer = {0, false};

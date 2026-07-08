@@ -27,6 +27,7 @@ const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
 const TIMER  = scripting.addModule("/ti/driverlib/TIMER", {}, false);
 const TIMER1 = TIMER.addInstance();
 const TIMER2 = TIMER.addInstance();
+const TIMER3 = TIMER.addInstance();
 const UART   = scripting.addModule("/ti/driverlib/UART", {}, false);
 const UART1  = UART.addInstance();
 const UART2  = UART.addInstance();
@@ -247,6 +248,11 @@ TIMER2.timerClkPrescale = 80;
 TIMER2.timerMode        = "ONE_SHOT_UP";
 TIMER2.timerPeriod      = "40 ms";
 
+TIMER3.$name       = "TIMER_Balance";
+TIMER3.timerPeriod = "5 ms";
+TIMER3.timerClkDiv = 8;
+TIMER3.interrupts  = ["REPC","ZERO"];
+
 UART1.$name                            = "UART_WIT";
 UART1.targetBaudRate                   = 115200;
 UART1.direction                        = "RX";
@@ -268,15 +274,15 @@ UART2.$name                            = "UART_BT";
 UART2.peripheral.$assign               = "UART1";
 UART2.peripheral.rxPin.$assign         = "PA9";
 UART2.peripheral.txPin.$assign         = "PA8";
-UART2.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric3";
 UART2.txPinConfig.direction            = scripting.forceWrite("OUTPUT");
 UART2.txPinConfig.hideOutputInversion  = scripting.forceWrite(false);
 UART2.txPinConfig.onlyInternalResistor = scripting.forceWrite(false);
 UART2.txPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
-UART2.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric4";
+UART2.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric3";
 UART2.rxPinConfig.hideOutputInversion  = scripting.forceWrite(false);
 UART2.rxPinConfig.onlyInternalResistor = scripting.forceWrite(false);
 UART2.rxPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART2.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric4";
 
 /**
  * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
@@ -308,7 +314,8 @@ GPIO8.associatedPins[0].pin.$suggestSolution     = "PB12";
 GPIO8.associatedPins[1].pin.$suggestSolution     = "PB13";
 GPIO9.associatedPins[0].pin.$suggestSolution     = "PB17";
 PWM3.peripheral.$suggestSolution                 = "TIMG8";
-TIMER1.peripheral.$suggestSolution               = "TIMG0";
-TIMER2.peripheral.$suggestSolution               = "TIMA0";
+TIMER1.peripheral.$suggestSolution               = "TIMG6";
+TIMER2.peripheral.$suggestSolution               = "TIMG0";
+TIMER3.peripheral.$suggestSolution               = "TIMA0";
 UART1.peripheral.$suggestSolution                = "UART0";
 UART1.DMA_CHANNEL_RX.peripheral.$suggestSolution = "DMA_CH0";

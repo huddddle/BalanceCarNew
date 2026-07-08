@@ -129,15 +129,20 @@ extern "C" {
 
 
 /* Defines for TIMER_0 */
-#define TIMER_0_INST                                                     (TIMG0)
-#define TIMER_0_INST_IRQHandler                                 TIMG0_IRQHandler
-#define TIMER_0_INST_INT_IRQN                                   (TIMG0_INT_IRQn)
-#define TIMER_0_INST_LOAD_VALUE                                         (12499U)
+#define TIMER_0_INST                                                     (TIMG6)
+#define TIMER_0_INST_IRQHandler                                 TIMG6_IRQHandler
+#define TIMER_0_INST_INT_IRQN                                   (TIMG6_INT_IRQn)
+#define TIMER_0_INST_LOAD_VALUE                                         (24999U)
 /* Defines for TIMER_ULTRASONIC */
-#define TIMER_ULTRASONIC_INST                                            (TIMA0)
-#define TIMER_ULTRASONIC_INST_IRQHandler                        TIMA0_IRQHandler
-#define TIMER_ULTRASONIC_INST_INT_IRQN                          (TIMA0_INT_IRQn)
-#define TIMER_ULTRASONIC_INST_LOAD_VALUE                                (39999U)
+#define TIMER_ULTRASONIC_INST                                            (TIMG0)
+#define TIMER_ULTRASONIC_INST_IRQHandler                        TIMG0_IRQHandler
+#define TIMER_ULTRASONIC_INST_INT_IRQN                          (TIMG0_INT_IRQn)
+#define TIMER_ULTRASONIC_INST_LOAD_VALUE                                (19999U)
+/* Defines for TIMER_Balance */
+#define TIMER_Balance_INST                                               (TIMA0)
+#define TIMER_Balance_INST_IRQHandler                           TIMA0_IRQHandler
+#define TIMER_Balance_INST_INT_IRQN                             (TIMA0_INT_IRQn)
+#define TIMER_Balance_INST_LOAD_VALUE                                   (49999U)
 
 
 
@@ -303,6 +308,7 @@ void SYSCFG_DL_PWM_SERVO_init(void);
 void SYSCFG_DL_PWM_ULTRASONIC_init(void);
 void SYSCFG_DL_TIMER_0_init(void);
 void SYSCFG_DL_TIMER_ULTRASONIC_init(void);
+void SYSCFG_DL_TIMER_Balance_init(void);
 void SYSCFG_DL_UART_WIT_init(void);
 void SYSCFG_DL_UART_BT_init(void);
 void SYSCFG_DL_DMA_init(void);

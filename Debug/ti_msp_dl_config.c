@@ -42,7 +42,8 @@
 
 DL_TimerA_backupConfig gPWM_0Backup;
 DL_TimerG_backupConfig gPWM_SERVOBackup;
-DL_TimerA_backupConfig gTIMER_ULTRASONICBackup;
+DL_TimerG_backupConfig gTIMER_0Backup;
+DL_TimerA_backupConfig gTIMER_BalanceBackup;
 
 /*
  *  ======== SYSCFG_DL_init ========
@@ -59,13 +60,15 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_PWM_ULTRASONIC_init();
     SYSCFG_DL_TIMER_0_init();
     SYSCFG_DL_TIMER_ULTRASONIC_init();
+    SYSCFG_DL_TIMER_Balance_init();
     SYSCFG_DL_UART_WIT_init();
     SYSCFG_DL_UART_BT_init();
     SYSCFG_DL_DMA_init();
     /* Ensure backup structures have no valid state */
 	gPWM_0Backup.backupRdy 	= false;
 	gPWM_SERVOBackup.backupRdy 	= false;
-	gTIMER_ULTRASONICBackup.backupRdy 	= false;
+	gTIMER_0Backup.backupRdy 	= false;
+	gTIMER_BalanceBackup.backupRdy 	= false;
 
 
 }
@@ -79,7 +82,8 @@ SYSCONFIG_WEAK bool SYSCFG_DL_saveConfiguration(void)
 
 	retStatus &= DL_TimerA_saveConfiguration(PWM_0_INST, &gPWM_0Backup);
 	retStatus &= DL_TimerG_saveConfiguration(PWM_SERVO_INST, &gPWM_SERVOBackup);
-	retStatus &= DL_TimerA_saveConfiguration(TIMER_ULTRASONIC_INST, &gTIMER_ULTRASONICBackup);
+	retStatus &= DL_TimerG_saveConfiguration(TIMER_0_INST, &gTIMER_0Backup);
+	retStatus &= DL_TimerA_saveConfiguration(TIMER_Balance_INST, &gTIMER_BalanceBackup);
 
     return retStatus;
 }
@@ -91,7 +95,8 @@ SYSCONFIG_WEAK bool SYSCFG_DL_restoreConfiguration(void)
 
 	retStatus &= DL_TimerA_restoreConfiguration(PWM_0_INST, &gPWM_0Backup, false);
 	retStatus &= DL_TimerG_restoreConfiguration(PWM_SERVO_INST, &gPWM_SERVOBackup, false);
-	retStatus &= DL_TimerA_restoreConfiguration(TIMER_ULTRASONIC_INST, &gTIMER_ULTRASONICBackup, false);
+	retStatus &= DL_TimerG_restoreConfiguration(TIMER_0_INST, &gTIMER_0Backup, false);
+	retStatus &= DL_TimerA_restoreConfiguration(TIMER_Balance_INST, &gTIMER_BalanceBackup, false);
 
     return retStatus;
 }
@@ -104,7 +109,8 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_TimerG_reset(PWM_SERVO_INST);
     DL_TimerG_reset(PWM_ULTRASONIC_INST);
     DL_TimerG_reset(TIMER_0_INST);
-    DL_TimerA_reset(TIMER_ULTRASONIC_INST);
+    DL_TimerG_reset(TIMER_ULTRASONIC_INST);
+    DL_TimerA_reset(TIMER_Balance_INST);
     DL_UART_Main_reset(UART_WIT_INST);
     DL_UART_Main_reset(UART_BT_INST);
 
@@ -115,7 +121,8 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_TimerG_enablePower(PWM_SERVO_INST);
     DL_TimerG_enablePower(PWM_ULTRASONIC_INST);
     DL_TimerG_enablePower(TIMER_0_INST);
-    DL_TimerA_enablePower(TIMER_ULTRASONIC_INST);
+    DL_TimerG_enablePower(TIMER_ULTRASONIC_INST);
+    DL_TimerA_enablePower(TIMER_Balance_INST);
     DL_UART_Main_enablePower(UART_WIT_INST);
     DL_UART_Main_enablePower(UART_BT_INST);
 
@@ -439,9 +446,9 @@ SYSCONFIG_WEAK void SYSCFG_DL_PWM_ULTRASONIC_init(void) {
 
 
 /*
- * Timer clock configuration to be sourced by BUSCLK /  (5000000 Hz)
+ * Timer clock configuration to be sourced by BUSCLK /  (10000000 Hz)
  * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
- *   25000 Hz = 5000000 Hz / (8 * (199 + 1))
+ *   50000 Hz = 10000000 Hz / (8 * (199 + 1))
  */
 static const DL_TimerG_ClockConfig gTIMER_0ClockConfig = {
     .clockSel    = DL_TIMER_CLOCK_BUSCLK,
@@ -451,7 +458,7 @@ static const DL_TimerG_ClockConfig gTIMER_0ClockConfig = {
 
 /*
  * Timer load value (where the counter starts from) is calculated as (timerPeriod * timerClockFreq) - 1
- * TIMER_0_INST_LOAD_VALUE = (0.5s * 25000 Hz) - 1
+ * TIMER_0_INST_LOAD_VALUE = (0.5s * 50000 Hz) - 1
  */
 static const DL_TimerG_TimerConfig gTIMER_0TimerConfig = {
     .period     = TIMER_0_INST_LOAD_VALUE,
@@ -476,11 +483,11 @@ SYSCONFIG_WEAK void SYSCFG_DL_TIMER_0_init(void) {
 }
 
 /*
- * Timer clock configuration to be sourced by BUSCLK /  (80000000 Hz)
+ * Timer clock configuration to be sourced by BUSCLK /  (40000000 Hz)
  * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
- *   1000000 Hz = 80000000 Hz / (1 * (79 + 1))
+ *   500000 Hz = 40000000 Hz / (1 * (79 + 1))
  */
-static const DL_TimerA_ClockConfig gTIMER_ULTRASONICClockConfig = {
+static const DL_TimerG_ClockConfig gTIMER_ULTRASONICClockConfig = {
     .clockSel    = DL_TIMER_CLOCK_BUSCLK,
     .divideRatio = DL_TIMER_CLOCK_DIVIDE_1,
     .prescale    = 79U,
@@ -488,9 +495,9 @@ static const DL_TimerA_ClockConfig gTIMER_ULTRASONICClockConfig = {
 
 /*
  * Timer load value (where the counter starts from) is calculated as (timerPeriod * timerClockFreq) - 1
- * TIMER_ULTRASONIC_INST_LOAD_VALUE = (40 ms * 1000000 Hz) - 1
+ * TIMER_ULTRASONIC_INST_LOAD_VALUE = (40 ms * 500000 Hz) - 1
  */
-static const DL_TimerA_TimerConfig gTIMER_ULTRASONICTimerConfig = {
+static const DL_TimerG_TimerConfig gTIMER_ULTRASONICTimerConfig = {
     .period     = TIMER_ULTRASONIC_INST_LOAD_VALUE,
     .timerMode  = DL_TIMER_TIMER_MODE_ONE_SHOT_UP,
     .startTimer = DL_TIMER_STOP,
@@ -498,12 +505,50 @@ static const DL_TimerA_TimerConfig gTIMER_ULTRASONICTimerConfig = {
 
 SYSCONFIG_WEAK void SYSCFG_DL_TIMER_ULTRASONIC_init(void) {
 
-    DL_TimerA_setClockConfig(TIMER_ULTRASONIC_INST,
-        (DL_TimerA_ClockConfig *) &gTIMER_ULTRASONICClockConfig);
+    DL_TimerG_setClockConfig(TIMER_ULTRASONIC_INST,
+        (DL_TimerG_ClockConfig *) &gTIMER_ULTRASONICClockConfig);
 
-    DL_TimerA_initTimerMode(TIMER_ULTRASONIC_INST,
-        (DL_TimerA_TimerConfig *) &gTIMER_ULTRASONICTimerConfig);
-    DL_TimerA_enableClock(TIMER_ULTRASONIC_INST);
+    DL_TimerG_initTimerMode(TIMER_ULTRASONIC_INST,
+        (DL_TimerG_TimerConfig *) &gTIMER_ULTRASONICTimerConfig);
+    DL_TimerG_enableClock(TIMER_ULTRASONIC_INST);
+
+
+
+
+
+}
+
+/*
+ * Timer clock configuration to be sourced by BUSCLK /  (10000000 Hz)
+ * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
+ *   10000000 Hz = 10000000 Hz / (8 * (0 + 1))
+ */
+static const DL_TimerA_ClockConfig gTIMER_BalanceClockConfig = {
+    .clockSel    = DL_TIMER_CLOCK_BUSCLK,
+    .divideRatio = DL_TIMER_CLOCK_DIVIDE_8,
+    .prescale    = 0U,
+};
+
+/*
+ * Timer load value (where the counter starts from) is calculated as (timerPeriod * timerClockFreq) - 1
+ * TIMER_Balance_INST_LOAD_VALUE = (5 ms * 10000000 Hz) - 1
+ */
+static const DL_TimerA_TimerConfig gTIMER_BalanceTimerConfig = {
+    .period     = TIMER_Balance_INST_LOAD_VALUE,
+    .timerMode  = DL_TIMER_TIMER_MODE_ONE_SHOT,
+    .startTimer = DL_TIMER_STOP,
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_TIMER_Balance_init(void) {
+
+    DL_TimerA_setClockConfig(TIMER_Balance_INST,
+        (DL_TimerA_ClockConfig *) &gTIMER_BalanceClockConfig);
+
+    DL_TimerA_initTimerMode(TIMER_Balance_INST,
+        (DL_TimerA_TimerConfig *) &gTIMER_BalanceTimerConfig);
+    DL_TimerA_enableInterrupt(TIMER_Balance_INST , DL_TIMERA_INTERRUPT_REPC_EVENT |
+		DL_TIMERA_INTERRUPT_ZERO_EVENT);
+    DL_TimerA_enableClock(TIMER_Balance_INST);
 
 
 

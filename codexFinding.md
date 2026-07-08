@@ -1,30 +1,72 @@
-# balance() 实现记录
+# BalanceCarNew 控制环记录与建议
 
-## 本次修改
+## 本次代码调整
 
-- 只修改了 `Move/move.c` 中的 `balance()` 函数体。
-- `balance()` 使用现有工程里的 `wit_data.pitch` 作为姿态输入。代码中没有发现名为 `wit.pitch` 的变量，WIT 数据结构在 `global.h` 中定义为 `WIT_Data_t wit_data`。
-- 直立环采用 PD 控制：
-  - 第一次进入 `balance()` 时，把当前 `wit_data.pitch` 记录为目标直立角 `target_pitch`。
-  - 后续用 `pitch_error = wit_data.pitch - target_pitch` 计算角度误差。
-  - 用本次误差和上次误差之差作为微分项。
-  - 输出 PWM 同时给左右轮，实现最基础的直立控制。
-- 增加了 35 度倾倒保护，误差过大时直接调用 `TB6612_Motor_Stop()`。
+- 直立环角度源应使用 `wit_data.roll`，不是 `wit_data.pitch`。当前 `balance_stand()` 已按 `roll` 计算误差。
+- 在 `PID/pid.c` 中新增了位置式 PID 封装函数 `Loca_PID()`，并保留原来的增量式 `Speed()`，避免影响已有速度闭环代码。
+- `Loca_PID()` 使用独立的 `LocaPID_t` 状态结构保存积分项和上一次误差，避免直立环、速度环、转向环共用同一组静态误差。
+- `LocaPID_t` 现在包含 `integral_limit`、`output_limit` 和 `output_deadband`。最大输出和最小有效输出都集中在 PID 结构体里，控制函数里不再散落多个限幅变量。
+- `balance_stand()` 当前仍然只输出直立环 PWM，速度环和转向环没有接入最终电机输出，方便你按顺序调参。
+- 在 `balance_stand()` 后面新增了两个暂不调用的计算函数：
+  - `balance_speed_pwm(int target_speed)`：用左右编码器速度平均值计算速度环 PWM。
+  - `balance_turn_pwm(float target_yaw)`：用 yaw 误差计算转向环 PWM。
+- `Move/move.c` 中新增了 `BalanceTimerInit()` 和 `TIMER_Balance_INST_IRQHandler()`。`TIMER_Balance` 目前是 5ms one-shot 定时器，ISR 在 ZERO 事件里执行一次直立环，然后重新启动定时器，形成 200Hz 控制节拍。
 
-## 当前参数
+## 当前代码结构建议
 
-- `Kp_balance = 35.0f`
-- `Kd_balance = 220.0f`
-- `fall_limit = 35.0f`
-- `max_balance_pwm = 850`
-- `min_effective_pwm = 20`
+- 三环最终可以按这个形式叠加：
+  - `left_pwm = upright_pwm + speed_pwm + turn_pwm`
+  - `right_pwm = upright_pwm + speed_pwm - turn_pwm`
+- 现在建议继续只调 `upright_pwm`，不要急着打开速度环。直立环站不稳时，速度环会把问题掩盖掉。
+- 速度环函数里我按平衡车常见正反馈思路写了 `speed_error = current_speed - target_speed`。后续一旦接入，第一步必须做极性检查。
+- 转向环现在是 yaw 位置式 PID。真正用于平衡车转向时，通常可以先只用 P，之后再根据 `wit_data.gz` 或 yaw 误差变化补 D。
 
-这些值是起步参数，需要上车后根据实际重心、电机、轮胎和 WIT 安装方向继续调整。
+## 你现在现象的判断
 
-## 调试建议
+你描述的是“有抑制倾斜的回正，但是无法遏制倾倒趋势，无法真正回正”。这通常不是单纯缺少速度环，而是直立环还没有把“追赶重心”的力度和阻尼调到位。
 
-1. 启动任务前，先手扶小车在直立平衡位置，再进入 `assignment1()`，因为当前目标 pitch 是第一次调用 `balance()` 时记录的值。
-2. 如果车身向前倒时轮子也向前跑，导致越倒越快，说明控制方向反了，需要把 `balance_pwm` 的符号取反，或调换 `Left_Control/Right_Control` 的方向逻辑。建议只在 `balance()` 内改，先不要动电机驱动文件。
-3. 调参顺序建议先调 `Kp_balance`，让车有明显回正趋势；再逐步增加 `Kd_balance` 抑制抖动。若快速抽搐，先降 `Kd_balance`；若软趴趴扶不住，先升 `Kp_balance`。
-4. 当前只是直立环，没有速度环和转向环。车能短时间站住后，下一步建议加入速度环，用编码器速度抑制小车持续漂移。
-5. 我发现 `Drivers/Motor/Motor.c` 里的 `Right_Control()` 在 `speed <= 0` 时会强制改成 `10`，所以用 `Right_Control(1, 0)` 不能真正让右电机完全停转。本次没有改函数外代码，而是在 `balance()` 的小输出和倾倒保护里直接使用 `TB6612_Motor_Stop()`。
+优先检查这几件事：
+
+1. **极性**：车体向前倒时，轮子必须向前追；车体向后倒时，轮子必须向后追。如果方向反了，Kp/Kd 怎么调都救不回来。
+2. **机械零点**：`target_roll = -9.0f` 必须是断电手扶时真正临界平衡的角度。如果零点偏了，车会一直认为自己有误差，只能持续跑。
+3. **Kp 是否偏小**：如果能感觉到回正，但追不上倒下速度，多数是 Kp 不够，电机没有足够快地追重心。
+4. **Kd 是否偏小或方向不合适**：如果车体已经开始倒下，控制还显得迟缓，说明阻尼不够。当前 D 项来自角度误差差分，后续更建议用 `wit_data.gx` 作为 roll 角速度来源。
+5. **控制周期**：直立环最好固定在 5ms 左右执行。如果现在放在 `while(1)` 里，OLED、串口、delay 或任务逻辑都会让周期抖动，D 项会跟着乱。
+
+## 关于 `wit_data.gz` 的控制思路
+
+先区分两个概念：`wit_data.roll/yaw` 是角度，`wit_data.gx/gy/gz` 是角速度。角度告诉你“现在偏了多少”，角速度告诉你“正在往哪个方向倒/转，以及倒/转得多快”。平衡车要遏制倾倒趋势，最关键的是利用角速度提前刹住趋势，而不是等角度已经变大以后才补救。
+
+`wit_data.gz` 通常是 Z 轴角速度，也就是 yaw 方向的旋转速度。因此它最适合放在转向环里，用来抑制转向过冲：
+
+```c
+turn_pwm = Kp_turn * yaw_error - Kd_turn * wit_data.gz;
+```
+
+这个公式的含义是：如果小车还没转到目标方向，`yaw_error` 会给它一个转向力；如果它已经在快速朝目标方向转，`gz` 会提供阻尼，提前收力，防止冲过头。符号不一定永远是减号，因为 WIT 的安装方向和你的左右电机正反定义会影响极性。实车检查方式是：手动让车朝 yaw 增大的方向旋转，观察 `wit_data.gz` 的正负；如果加入 `gz` 后转向更容易发散，就把 D 项符号反过来。
+
+但如果你说的是“直立环无法遏制倾倒趋势”，那不应该优先用 `gz`。直立环现在用的是 `roll`，理论上应该配合 roll 轴角速度，常见对应是 `wit_data.gx`。更稳的直立环写法通常是：
+
+```c
+upright_pwm = Kp_up * (wit_data.roll - target_roll) + Kd_up * roll_gyro;
+```
+
+这里的 `roll_gyro` 要通过实测确认，常见是 `wit_data.gx`，也可能因为模块安装旋转而变成 `wit_data.gy` 或符号相反。判断方法是：固定车轮，手扶车体沿当前“roll 倾倒方向”快速前后晃动，看 `gx/gy/gz` 哪个变化最大，那个轴就是直立环 D 项应该用的角速度。用陀螺仪角速度做 D 项，比用 `roll_error - last_roll_error` 更直接，延迟更小，对“已经开始倒下”的趋势抑制更有效。
+
+我的建议是：转向环用 `gz`；直立环不要盲目用 `gz`，先找出 roll 对应的 gyro 轴，再把角度差分 D 项替换成对应的 gyro D 项。
+
+## 调参顺序
+
+1. 先只保留直立环，速度环、转向环输出保持不用。
+2. 固定 `target_roll`，确认手扶临界点附近 `roll_error` 接近 0。
+3. 逐步增加 `Kp_balance`，直到车能明显主动追重心，但开始出现来回抖动。
+4. 再逐步增加 `Kd_balance`，让抖动收敛，车体变得有阻尼感。
+5. 如果加大 Kd 后反而更快倒，先不要继续加参数，优先检查 D 项极性，或改用 `wit_data.gx`。
+6. 直立环能短暂站住后，再接速度环，最后才接转向环。
+
+## 额外代码建议
+
+- `Right_Control()` 中 `speed <= 0` 会被强制改成 `10`，所以 `Right_Control(1, 0)` 不是严格停止。需要停车时优先用 `TB6612_Motor_Stop()`。
+- 当前 `balance_stand()` 已经通过 `output_deadband` 让小 PWM 归零，并在零输出时调用 `TB6612_Motor_Stop()`，避免保留上一次 PWM。
+- 速度环建议 20Hz 左右执行，不要和 200Hz 直立环同频；编码器速度需要一点采样窗口，否则量化噪声会很明显。
+- 位置式 PID 的积分项必须有限幅，尤其速度环打开后，否则积分饱和会让小车突然冲出去。

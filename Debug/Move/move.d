@@ -80,7 +80,9 @@ Move/move.o: ../Move/move.c ../Move/move.h \
  C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h \
  C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/turn.h \
  C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0/clock.h \
- C:/Users/ROG/workspace_ccstheia/BalanceCarNew/AssignmentChoose/assignment.h
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/AssignmentChoose/assignment.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID/pid.h \
+ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h
 ../Move/move.h:
 ti_msp_dl_config.h:
 F:/TI/mspm0_sdk_2_05_00_05/source/ti/devices/msp/msp.h:
@@ -162,3 +164,5 @@ C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor/Motor.h:
 C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/turn.h:
 C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0/clock.h:
 C:/Users/ROG/workspace_ccstheia/BalanceCarNew/AssignmentChoose/assignment.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID/pid.h:
+C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT/wit.h:
