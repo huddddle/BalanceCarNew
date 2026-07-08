@@ -1,0 +1,15 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Each subdirectory must supply rules for building sources it contributes
+TURN/turn.o: ../TURN/turn.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"F:/TI/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/bin/tiarmclang.exe" -c @"device.opt"  -march=thumbv6m -mcpu=cortex-m0plus -mfloat-abi=soft -mlittle-endian -mthumb -O0 -I"/TURN" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/AssignmentChoose" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/IRTRACKING" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/UART" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SERVO" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/SPEED" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/WIT" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Irtracking" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Motor" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/BNO08X_UART_RVC" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Ultrasonic_GPIO" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/Ultrasonic_Capture" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Hardware_I2C" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Hardware_SPI" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Software_I2C" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/OLED_Software_SPI" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MPU6050" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/PID" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/INTERRUPT/" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/TURN/" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Debug" -I"F:/TI/mspm0_sdk_2_05_00_05/source/third_party/CMSIS/Core/Include" -I"F:/TI/mspm0_sdk_2_05_00_05/source" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Drivers/MSPM0" -I"C:/Users/ROG/workspace_ccstheia/BalanceCarNew/Move" -DMOTION_DRIVER_TARGET_MSPM0 -DMPU6050 -D__MSPM0G3507__ -gdwarf-3 -MMD -MP -MF"TURN/$(basename $(<F)).d_raw" -MT"TURN/$(basename\ $(<F)).o"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+
