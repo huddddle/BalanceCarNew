@@ -92,7 +92,7 @@ extern struct Data Yuntai;
 
 
 //Move part
-extern uint8_t x[8] ;
+extern uint8_t x[12];
 extern uint16_t IrSensorNumber;
 extern int last_tracking_error;
 extern int indexx_move;

@@ -6,7 +6,8 @@
 "./Drivers/MSPM0/clock.o"
 "./Drivers/MSPM0/interrupt.o"
 "./Drivers/Motor/Motor.o"
-"./Drivers/OLED_Software_I2C/oled_software_i2c.o"
+"./Drivers/OLED_Hardware_I2C/oled_hardware_i2c.o"
+"./Drivers/TrackingModuleIIC/trackingiic.o"
 "./Drivers/Ultrasonic_GPIO/ultrasonic_gpio.o"
 "./Drivers/WIT/wit.o"
 "./INTERRUPT/interrupt.o"
@@ -20,4 +21,4 @@
 -l"./device_linker.cmd"
 -ldevice.cmd.genlibs
 -llibc.a
--l"F:/TI/mspm0_sdk_2_05_00_05/source/ti/driverlib/lib/ticlang/m0p/mspm0g1x0x_g3x0x/driverlib.a"
+-l"C:/TI/mspm0_sdk_2_04_00_06/source/ti/driverlib/lib/ticlang/m0p/mspm0g1x0x_g3x0x/driverlib.a"

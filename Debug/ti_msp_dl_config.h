@@ -146,6 +146,22 @@ extern "C" {
 
 
 
+
+/* Defines for I2C_OLED */
+#define I2C_OLED_INST                                                       I2C1
+#define I2C_OLED_INST_IRQHandler                                 I2C1_IRQHandler
+#define I2C_OLED_INST_INT_IRQN                                     I2C1_INT_IRQn
+#define I2C_OLED_BUS_SPEED_HZ                                             100000
+#define GPIO_I2C_OLED_SDA_PORT                                             GPIOA
+#define GPIO_I2C_OLED_SDA_PIN                                     DL_GPIO_PIN_16
+#define GPIO_I2C_OLED_IOMUX_SDA                                  (IOMUX_PINCM38)
+#define GPIO_I2C_OLED_IOMUX_SDA_FUNC                   IOMUX_PINCM38_PF_I2C1_SDA
+#define GPIO_I2C_OLED_SCL_PORT                                             GPIOA
+#define GPIO_I2C_OLED_SCL_PIN                                     DL_GPIO_PIN_17
+#define GPIO_I2C_OLED_IOMUX_SCL                                  (IOMUX_PINCM39)
+#define GPIO_I2C_OLED_IOMUX_SCL_FUNC                   IOMUX_PINCM39_PF_I2C1_SCL
+
+
 /* Defines for UART_WIT */
 #define UART_WIT_INST                                                      UART0
 #define UART_WIT_INST_FREQUENCY                                         40000000
@@ -309,6 +325,7 @@ void SYSCFG_DL_PWM_ULTRASONIC_init(void);
 void SYSCFG_DL_TIMER_0_init(void);
 void SYSCFG_DL_TIMER_ULTRASONIC_init(void);
 void SYSCFG_DL_TIMER_Balance_init(void);
+void SYSCFG_DL_I2C_OLED_init(void);
 void SYSCFG_DL_UART_WIT_init(void);
 void SYSCFG_DL_UART_BT_init(void);
 void SYSCFG_DL_DMA_init(void);

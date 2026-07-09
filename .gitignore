@@ -1,0 +1,27 @@
+# TI Code Composer Studio / Eclipse workspace files
+Debug/
+Release/
+.metadata/
+.settings/
+.theia/
+.clangd
+.ccsproject
+.cproject
+.project
+
+# Generated dependency / build outputs
+*.d
+*.o
+*.obj
+*.elf
+*.hex
+*.map
+*.out
+*.log
+*.tmp
+*.bak
+
+# Editor and OS noise
+.vscode/
+Thumbs.db
+.DS_Store

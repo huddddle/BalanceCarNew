@@ -16,12 +16,12 @@ int irSpeed=400; // 巡线速度
 
 // 
 int32_t pid_output_IRR = 0;
-uint8_t x[8] = {0};
+static uint8_t move_track_x[8] = {0};
 
 
 int indexx_move = 0;
 int EnableCrossingFlag=1;//控制转完之后不在转向
-uint16_t IrSensorNumber=0;
+static uint16_t move_IrSensorNumber=0;
 SoftTimer_t ModuleTrackingTimer = {0, false};
 SoftTimer_t ParkingTimer = {0, false};
 extern uint8_t shapeFlag;  // 0:圆形, 1:正方形, 2:三角形, 3:椭圆形
@@ -179,8 +179,8 @@ void BalanceTimerInit(void)
 //以下是成员函数
 int trackingLeftTurn(void)
 {
-  track_deal_sensor(x);
-  if(x[3]==1||x[4]==1)
+  track_deal_sensor(move_track_x);
+  if(move_track_x[3]==1||move_track_x[4]==1)
   {
     turnCompleted++;
     return 10;  
@@ -196,8 +196,8 @@ int trackingLeftTurn(void)
 //以下是成员函数
 int trackingRightTurn(void)
 {
-  track_deal_sensor(x);
-  if(x[3]==1||x[4]==1)
+  track_deal_sensor(move_track_x);
+  if(move_track_x[3]==1||move_track_x[4]==1)
   {
     turnCompleted++;
     return 10;  
@@ -220,15 +220,15 @@ static void ModuleTracking_RunFollow(void)
   int turn_pwm=0;
   int Tracking_Sum = 0;
 
-  if(IrSensorNumber > 0 && IrSensorNumber <= 2) {
-    if(x[0]) Tracking_Sum += 60;
-    if(x[1]) Tracking_Sum += 40;
-    if(x[2]) Tracking_Sum += 20;
-    if(x[3]) Tracking_Sum += 10;
-    if(x[4]) Tracking_Sum -= 10;
-    if(x[5]) Tracking_Sum -= 20;
-    if(x[6]) Tracking_Sum -= 40;
-    if(x[7]) Tracking_Sum -= 60;
+  if(move_IrSensorNumber > 0 && move_IrSensorNumber <= 2) {
+    if(move_track_x[0]) Tracking_Sum += 60;
+    if(move_track_x[1]) Tracking_Sum += 40;
+    if(move_track_x[2]) Tracking_Sum += 20;
+    if(move_track_x[3]) Tracking_Sum += 10;
+    if(move_track_x[4]) Tracking_Sum -= 10;
+    if(move_track_x[5]) Tracking_Sum -= 20;
+    if(move_track_x[6]) Tracking_Sum -= 40;
+    if(move_track_x[7]) Tracking_Sum -= 60;
   }
 
   float Kp = 1.0f;
@@ -315,11 +315,11 @@ void Tracking(void) {
   // static int8_t RightturningPoint=0;//循迹转向防抖
 
   // 转弯识别
-  track_deal_sensor(x);
-  if (IrSensorNumber >= 3 && IrSensorNumber <= 6) {
+  track_deal_sensor(move_track_x);
+  if (move_IrSensorNumber >= 3 && move_IrSensorNumber <= 6) {
     // 使用加权比较，给最外侧的灯（x[0]和x[7]）更高的权重，确保转向意图清晰
-    int left_score = x[0] * 3 + x[1] * 2 + x[2] * 1;
-    int right_score = x[7] * 3 + x[6] * 2 + x[5] * 1;
+    int left_score = move_track_x[0] * 3 + move_track_x[1] * 2 + move_track_x[2] * 1;
+    int right_score = move_track_x[7] * 3 + move_track_x[6] * 2 + move_track_x[5] * 1;
 
     // left_score>right_score ? LeftturningPoint++,RightturningPoint--
     // :LeftturningPoint--,RightturningPoint++ ;
@@ -327,7 +327,7 @@ void Tracking(void) {
     if (left_score > right_score) // 疑似左转路口进行判定
     {
       mspm0_delay_ms(65);
-      if (track_deal_sensor(x) != 0) // 还有路是说是十字路口
+      if (track_deal_sensor(move_track_x) != 0) // 还有路是说是十字路口
       {
         CrossingFlag++;LeftTurnFlag = 0;RightTurnFlag = 0;
         return;
@@ -338,7 +338,7 @@ void Tracking(void) {
     } else if (right_score > left_score) // 疑似右转路口进行判定
     {
       mspm0_delay_ms(75);
-      if (track_deal_sensor(x) != 0) // 还有路是说是十字路口
+      if (track_deal_sensor(move_track_x) != 0) // 还有路是说是十字路口
       {
         CrossingFlag++;
         LeftTurnFlag = 0;
@@ -355,15 +355,15 @@ void Tracking(void) {
 
   int Tracking_Sum = 0;
   // 3. 正常循迹偏差计算
-  if(IrSensorNumber > 0 && IrSensorNumber <=2) {
-    if(x[0]) Tracking_Sum += 60;
-    if(x[1]) Tracking_Sum += 40;
-    if(x[2]) Tracking_Sum += 20;
-    if(x[3]) Tracking_Sum += 10;
-    if(x[4]) Tracking_Sum -= 10;
-    if(x[5]) Tracking_Sum -= 20;
-    if(x[6]) Tracking_Sum -= 40;
-    if(x[7]) Tracking_Sum -= 60;
+  if(move_IrSensorNumber > 0 && move_IrSensorNumber <=2) {
+    if(move_track_x[0]) Tracking_Sum += 60;
+    if(move_track_x[1]) Tracking_Sum += 40;
+    if(move_track_x[2]) Tracking_Sum += 20;
+    if(move_track_x[3]) Tracking_Sum += 10;
+    if(move_track_x[4]) Tracking_Sum -= 10;
+    if(move_track_x[5]) Tracking_Sum -= 20;
+    if(move_track_x[6]) Tracking_Sum -= 40;
+    if(move_track_x[7]) Tracking_Sum -= 60;
   }
 
   float Kp = 1.0f; // 循迹比例
@@ -385,7 +385,7 @@ void Tracking(void) {
 // IO口巡线探头的处理,遇黑线，指示灯亮，低电平，输出0
 int track_deal_sensor(uint8_t s[]) 
 {
-  IrSensorNumber=0;
+  move_IrSensorNumber=0;
   s[0] = DL_GPIO_readPins(IR_X_X1_PORT, IR_X_X1_PIN) > 0 ? 1 : 0;
   s[1] = DL_GPIO_readPins(IR_X_X2_PORT, IR_X_X2_PIN) > 0 ? 1 : 0;
   s[2] = DL_GPIO_readPins(IR_X_X3_PORT, IR_X_X3_PIN) > 0 ? 1 : 0;
@@ -396,9 +396,9 @@ int track_deal_sensor(uint8_t s[])
   s[7] = DL_GPIO_readPins(IR_X_X8_PORT, IR_X_X8_PIN) > 0 ? 1 : 0;
   for(int i=0;i<8;i++)
   {
-    IrSensorNumber+=s[i];
+    move_IrSensorNumber+=s[i];
   }
-  return IrSensorNumber;
+  return move_IrSensorNumber;
 }
 
 // ================== 陀螺仪闭环直线行走函数 ==================
