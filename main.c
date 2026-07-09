@@ -44,8 +44,10 @@
 #include"interrupt.h"
 #include "global.h"
 #include "wit.h"
+#include "trackingiic.h"
 
 uint8_t oled_buffer[64];
+static uint8_t track_buffer[13];
 volatile uint8_t gEchoData = 0;
 void (*assignment_function[8])(void)=
 {
@@ -82,10 +84,12 @@ int main(void)
   OLED_ShowString(0, 0, (uint8_t *)"AssiFlag:", 8);
   OLED_ShowString(0, 2, (uint8_t *)"Crossing:", 8);
   OLED_ShowString(0, 4, (uint8_t *)"Yaw:", 8);
-  OLED_ShowString(0, 6, (uint8_t *)"Status:", 8);
+  OLED_ShowString(0, 6, (uint8_t *)"Track:", 8);
 
   while (1) 
   {
+    trackSensorUpdate();
+
     // 显示 assignmentFlag
     sprintf((char *)oled_buffer, "%d", turnCompleted);
     OLED_ShowString(9 * 8, 0, oled_buffer, 16);
@@ -97,6 +101,12 @@ int main(void)
     // 显示 CrossingFlag (格式化版本)
     sprintf((char *)oled_buffer, "%-6.1f", wit_data.yaw);
     OLED_ShowString(9 * 8, 4, oled_buffer, 16);
+
+    sprintf((char *)track_buffer, "%d%d%d%d%d%d%d%d%d%d%d%d",
+      x[0], x[1], x[2], x[3], x[4], x[5],
+      x[6], x[7], x[8], x[9], x[10], x[11]);
+    OLED_ShowString(0, 7, track_buffer, 8);
+    OLED_ShowString(6 * 8, 6, (uint8_t *)(gTrackSensorOnline ? "OK" : "OFF"), 8);
 
     // sprintf((char *)oled_buffer, "%-6.4f", wit_data.yaw);
     // OLED_ShowString(9 * 8, 6, oled_buffer, 16);

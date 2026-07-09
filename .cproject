@@ -54,7 +54,7 @@
                                     <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>
-                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Irtracking"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/TrackingModuleIIC"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Motor"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/BNO08X_UART_RVC"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Ultrasonic_GPIO"/>

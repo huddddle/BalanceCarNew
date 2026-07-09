@@ -94,7 +94,8 @@ main.o: ../main.c D:/Electric/My_TI_Workspace/BalanceCarNew/UART/K230.h \
  D:/Electric/My_TI_Workspace/BalanceCarNew/PID/pid.h \
  D:/Electric/My_TI_Workspace/BalanceCarNew/AssignmentChoose/assignment.h \
  D:/Electric/My_TI_Workspace/BalanceCarNew/SPEED/speed.h \
- D:/Electric/My_TI_Workspace/BalanceCarNew/TURN/turn.h ../global.h
+ D:/Electric/My_TI_Workspace/BalanceCarNew/TURN/turn.h ../global.h \
+ D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/TrackingModuleIIC/trackingiic.h
 D:/Electric/My_TI_Workspace/BalanceCarNew/UART/K230.h:
 D:/Electric/My_TI_Workspace/BalanceCarNew/SERVO/servo.h:
 ti_msp_dl_config.h:
@@ -191,3 +192,4 @@ D:/Electric/My_TI_Workspace/BalanceCarNew/AssignmentChoose/assignment.h:
 D:/Electric/My_TI_Workspace/BalanceCarNew/SPEED/speed.h:
 D:/Electric/My_TI_Workspace/BalanceCarNew/TURN/turn.h:
 ../global.h:
+D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/TrackingModuleIIC/trackingiic.h:
