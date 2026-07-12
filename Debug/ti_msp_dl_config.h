@@ -190,6 +190,22 @@ extern "C" {
 #define UART_BT_BAUD_RATE                                                 (9600)
 #define UART_BT_IBRD_40_MHZ_9600_BAUD                                      (260)
 #define UART_BT_FBRD_40_MHZ_9600_BAUD                                       (27)
+/* Defines for UART_VISION */
+#define UART_VISION_INST                                                   UART3
+#define UART_VISION_INST_FREQUENCY                                      80000000
+#define UART_VISION_INST_IRQHandler                             UART3_IRQHandler
+#define UART_VISION_INST_INT_IRQN                                 UART3_INT_IRQn
+#define GPIO_UART_VISION_RX_PORT                                           GPIOA
+#define GPIO_UART_VISION_TX_PORT                                           GPIOA
+#define GPIO_UART_VISION_RX_PIN                                   DL_GPIO_PIN_25
+#define GPIO_UART_VISION_TX_PIN                                   DL_GPIO_PIN_26
+#define GPIO_UART_VISION_IOMUX_RX                                (IOMUX_PINCM55)
+#define GPIO_UART_VISION_IOMUX_TX                                (IOMUX_PINCM59)
+#define GPIO_UART_VISION_IOMUX_RX_FUNC                 IOMUX_PINCM55_PF_UART3_RX
+#define GPIO_UART_VISION_IOMUX_TX_FUNC                 IOMUX_PINCM59_PF_UART3_TX
+#define UART_VISION_BAUD_RATE                                           (115200)
+#define UART_VISION_IBRD_80_MHZ_115200_BAUD                                 (43)
+#define UART_VISION_FBRD_80_MHZ_115200_BAUD                                 (26)
 
 
 
@@ -328,6 +344,7 @@ void SYSCFG_DL_TIMER_Balance_init(void);
 void SYSCFG_DL_I2C_OLED_init(void);
 void SYSCFG_DL_UART_WIT_init(void);
 void SYSCFG_DL_UART_BT_init(void);
+void SYSCFG_DL_UART_VISION_init(void);
 void SYSCFG_DL_DMA_init(void);
 
 

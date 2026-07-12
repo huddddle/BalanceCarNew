@@ -44,6 +44,7 @@ DL_TimerA_backupConfig gPWM_0Backup;
 DL_TimerG_backupConfig gPWM_SERVOBackup;
 DL_TimerG_backupConfig gTIMER_0Backup;
 DL_TimerA_backupConfig gTIMER_BalanceBackup;
+DL_UART_Main_backupConfig gUART_VISIONBackup;
 
 /*
  *  ======== SYSCFG_DL_init ========
@@ -64,13 +65,14 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_I2C_OLED_init();
     SYSCFG_DL_UART_WIT_init();
     SYSCFG_DL_UART_BT_init();
+    SYSCFG_DL_UART_VISION_init();
     SYSCFG_DL_DMA_init();
     /* Ensure backup structures have no valid state */
 	gPWM_0Backup.backupRdy 	= false;
 	gPWM_SERVOBackup.backupRdy 	= false;
 	gTIMER_0Backup.backupRdy 	= false;
 	gTIMER_BalanceBackup.backupRdy 	= false;
-
+	gUART_VISIONBackup.backupRdy 	= false;
 
 }
 /*
@@ -85,6 +87,7 @@ SYSCONFIG_WEAK bool SYSCFG_DL_saveConfiguration(void)
 	retStatus &= DL_TimerG_saveConfiguration(PWM_SERVO_INST, &gPWM_SERVOBackup);
 	retStatus &= DL_TimerG_saveConfiguration(TIMER_0_INST, &gTIMER_0Backup);
 	retStatus &= DL_TimerA_saveConfiguration(TIMER_Balance_INST, &gTIMER_BalanceBackup);
+	retStatus &= DL_UART_Main_saveConfiguration(UART_VISION_INST, &gUART_VISIONBackup);
 
     return retStatus;
 }
@@ -98,6 +101,7 @@ SYSCONFIG_WEAK bool SYSCFG_DL_restoreConfiguration(void)
 	retStatus &= DL_TimerG_restoreConfiguration(PWM_SERVO_INST, &gPWM_SERVOBackup, false);
 	retStatus &= DL_TimerG_restoreConfiguration(TIMER_0_INST, &gTIMER_0Backup, false);
 	retStatus &= DL_TimerA_restoreConfiguration(TIMER_Balance_INST, &gTIMER_BalanceBackup, false);
+	retStatus &= DL_UART_Main_restoreConfiguration(UART_VISION_INST, &gUART_VISIONBackup);
 
     return retStatus;
 }
@@ -115,6 +119,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_I2C_reset(I2C_OLED_INST);
     DL_UART_Main_reset(UART_WIT_INST);
     DL_UART_Main_reset(UART_BT_INST);
+    DL_UART_Main_reset(UART_VISION_INST);
 
 
     DL_GPIO_enablePower(GPIOA);
@@ -128,6 +133,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_I2C_enablePower(I2C_OLED_INST);
     DL_UART_Main_enablePower(UART_WIT_INST);
     DL_UART_Main_enablePower(UART_BT_INST);
+    DL_UART_Main_enablePower(UART_VISION_INST);
 
     delay_cycles(POWER_STARTUP_DELAY);
 }
@@ -163,6 +169,10 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
         GPIO_UART_BT_IOMUX_TX, GPIO_UART_BT_IOMUX_TX_FUNC);
     DL_GPIO_initPeripheralInputFunction(
         GPIO_UART_BT_IOMUX_RX, GPIO_UART_BT_IOMUX_RX_FUNC);
+    DL_GPIO_initPeripheralOutputFunction(
+        GPIO_UART_VISION_IOMUX_TX, GPIO_UART_VISION_IOMUX_TX_FUNC);
+    DL_GPIO_initPeripheralInputFunction(
+        GPIO_UART_VISION_IOMUX_RX, GPIO_UART_VISION_IOMUX_RX_FUNC);
 
     DL_GPIO_initDigitalOutput(LED_USER_LED_IOMUX);
 
@@ -672,6 +682,42 @@ SYSCONFIG_WEAK void SYSCFG_DL_UART_BT_init(void)
 
 
     DL_UART_Main_enable(UART_BT_INST);
+}
+
+static const DL_UART_Main_ClockConfig gUART_VISIONClockConfig = {
+    .clockSel    = DL_UART_MAIN_CLOCK_BUSCLK,
+    .divideRatio = DL_UART_MAIN_CLOCK_DIVIDE_RATIO_1
+};
+
+static const DL_UART_Main_Config gUART_VISIONConfig = {
+    .mode        = DL_UART_MAIN_MODE_NORMAL,
+    .direction   = DL_UART_MAIN_DIRECTION_TX_RX,
+    .flowControl = DL_UART_MAIN_FLOW_CONTROL_NONE,
+    .parity      = DL_UART_MAIN_PARITY_NONE,
+    .wordLength  = DL_UART_MAIN_WORD_LENGTH_8_BITS,
+    .stopBits    = DL_UART_MAIN_STOP_BITS_ONE
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_UART_VISION_init(void)
+{
+    DL_UART_Main_setClockConfig(UART_VISION_INST, (DL_UART_Main_ClockConfig *) &gUART_VISIONClockConfig);
+
+    DL_UART_Main_init(UART_VISION_INST, (DL_UART_Main_Config *) &gUART_VISIONConfig);
+    /*
+     * Configure baud rate by setting oversampling and baud rate divisors.
+     *  Target baud rate: 115200
+     *  Actual baud rate: 115190.78
+     */
+    DL_UART_Main_setOversampling(UART_VISION_INST, DL_UART_OVERSAMPLING_RATE_16X);
+    DL_UART_Main_setBaudRateDivisor(UART_VISION_INST, UART_VISION_IBRD_80_MHZ_115200_BAUD, UART_VISION_FBRD_80_MHZ_115200_BAUD);
+
+
+    /* Configure Interrupts */
+    DL_UART_Main_enableInterrupt(UART_VISION_INST,
+                                 DL_UART_MAIN_INTERRUPT_RX);
+
+
+    DL_UART_Main_enable(UART_VISION_INST);
 }
 
 static const DL_DMA_Config gDMA_WITConfig = {

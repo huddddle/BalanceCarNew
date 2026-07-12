@@ -51,6 +51,7 @@
                                     <listOptionValue value="${PROJECT_ROOT}/AssignmentChoose"/>
                                     <listOptionValue value="${PROJECT_ROOT}/IRTRACKING"/>
                                     <listOptionValue value="${PROJECT_ROOT}/UART"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>
@@ -130,6 +131,7 @@
                                 <listOptionValue value="${PROJECT_ROOT}/AssignmentChoose"/>
                                 <listOptionValue value="${PROJECT_ROOT}/IRTRACKING"/>
                                 <listOptionValue value="${PROJECT_ROOT}/UART"/>
+                                <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
                                 <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                 <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                 <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>
@@ -168,6 +170,7 @@
                                     <listOptionValue value="${PROJECT_ROOT}/AssignmentChoose"/>
                                     <listOptionValue value="${PROJECT_ROOT}/IRTRACKING"/>
                                     <listOptionValue value="${PROJECT_ROOT}/UART"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Bluetooth"/>
@@ -214,6 +217,7 @@
                                     <listOptionValue value="${PROJECT_ROOT}/IRTRACKING"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Move"/>
                                     <listOptionValue value="${PROJECT_ROOT}/UART"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>
@@ -252,6 +256,7 @@
                                 <listOptionValue value="${PROJECT_ROOT}/AssignmentChoose"/>
                                 <listOptionValue value="${PROJECT_ROOT}/IRTRACKING"/>
                                 <listOptionValue value="${PROJECT_ROOT}/UART"/>
+                                <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
                                 <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                 <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                 <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>

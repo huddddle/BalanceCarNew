@@ -21,6 +21,7 @@ ORDERED_OBJS += \
 "./Drivers/OLED_Hardware_I2C/oled_hardware_i2c.o" \
 "./Drivers/TrackingModuleIIC/trackingiic.o" \
 "./Drivers/Ultrasonic_GPIO/ultrasonic_gpio.o" \
+"./Drivers/VisionTracking/vision_tracking.o" \
 "./Drivers/WIT/wit.o" \
 "./INTERRUPT/interrupt.o" \
 "./Move/move.o" \
@@ -50,6 +51,7 @@ RMDIR := RMDIR /S/Q
 -include Drivers/OLED_Hardware_I2C/subdir_vars.mk
 -include Drivers/TrackingModuleIIC/subdir_vars.mk
 -include Drivers/Ultrasonic_GPIO/subdir_vars.mk
+-include Drivers/VisionTracking/subdir_vars.mk
 -include Drivers/WIT/subdir_vars.mk
 -include INTERRUPT/subdir_vars.mk
 -include Move/subdir_vars.mk
@@ -67,6 +69,7 @@ RMDIR := RMDIR /S/Q
 -include Drivers/OLED_Hardware_I2C/subdir_rules.mk
 -include Drivers/TrackingModuleIIC/subdir_rules.mk
 -include Drivers/Ultrasonic_GPIO/subdir_rules.mk
+-include Drivers/VisionTracking/subdir_rules.mk
 -include Drivers/WIT/subdir_rules.mk
 -include INTERRUPT/subdir_rules.mk
 -include Move/subdir_rules.mk
@@ -115,9 +118,6 @@ endif
 ifneq ($(strip $(S64_DEPS)),)
 -include $(S64_DEPS)
 endif
-ifneq ($(strip $(INO_DEPS)),)
--include $(INO_DEPS)
-endif
 ifneq ($(strip $(CLA_DEPS)),)
 -include $(CLA_DEPS)
 endif
@@ -132,9 +132,6 @@ ifneq ($(strip $(C62_DEPS)),)
 endif
 ifneq ($(strip $(C67_DEPS)),)
 -include $(C67_DEPS)
-endif
-ifneq ($(strip $(PDE_DEPS)),)
--include $(PDE_DEPS)
 endif
 ifneq ($(strip $(K_DEPS)),)
 -include $(K_DEPS)
@@ -193,8 +190,8 @@ BalanceCarNew.out: $(OBJS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "AssignmentChoose\assignment.o" "Drivers\Bluetooth\bluetooth.o" "Drivers\MSPM0\clock.o" "Drivers\MSPM0\interrupt.o" "Drivers\Motor\Motor.o" "Drivers\OLED_Hardware_I2C\oled_hardware_i2c.o" "Drivers\TrackingModuleIIC\trackingiic.o" "Drivers\Ultrasonic_GPIO\ultrasonic_gpio.o" "Drivers\WIT\wit.o" "INTERRUPT\interrupt.o" "Move\move.o" "PID\pid.o" "SERVO\servo.o" "SPEED\speed.o" "TURN\turn.o" "UART\K230.o" "UserLib\Chassis\chassis.o" 
-	-$(RM) "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "AssignmentChoose\assignment.d" "Drivers\Bluetooth\bluetooth.d" "Drivers\MSPM0\clock.d" "Drivers\MSPM0\interrupt.d" "Drivers\Motor\Motor.d" "Drivers\OLED_Hardware_I2C\oled_hardware_i2c.d" "Drivers\TrackingModuleIIC\trackingiic.d" "Drivers\Ultrasonic_GPIO\ultrasonic_gpio.d" "Drivers\WIT\wit.d" "INTERRUPT\interrupt.d" "Move\move.d" "PID\pid.d" "SERVO\servo.d" "SPEED\speed.d" "TURN\turn.d" "UART\K230.d" 
+	-$(RM) "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "AssignmentChoose\assignment.o" "Drivers\Bluetooth\bluetooth.o" "Drivers\MSPM0\clock.o" "Drivers\MSPM0\interrupt.o" "Drivers\Motor\Motor.o" "Drivers\OLED_Hardware_I2C\oled_hardware_i2c.o" "Drivers\TrackingModuleIIC\trackingiic.o" "Drivers\Ultrasonic_GPIO\ultrasonic_gpio.o" "Drivers\VisionTracking\vision_tracking.o" "Drivers\WIT\wit.o" "INTERRUPT\interrupt.o" "Move\move.o" "PID\pid.o" "SERVO\servo.o" "SPEED\speed.o" "TURN\turn.o" "UART\K230.o" "UserLib\Chassis\chassis.o" 
+	-$(RM) "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "AssignmentChoose\assignment.d" "Drivers\Bluetooth\bluetooth.d" "Drivers\MSPM0\clock.d" "Drivers\MSPM0\interrupt.d" "Drivers\Motor\Motor.d" "Drivers\OLED_Hardware_I2C\oled_hardware_i2c.d" "Drivers\TrackingModuleIIC\trackingiic.d" "Drivers\Ultrasonic_GPIO\ultrasonic_gpio.d" "Drivers\VisionTracking\vision_tracking.d" "Drivers\WIT\wit.d" "INTERRUPT\interrupt.d" "Move\move.d" "PID\pid.d" "SERVO\servo.d" "SPEED\speed.d" "TURN\turn.d" "UART\K230.d" 
 	-$(RM) "UserLib\Chassis\chassis.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

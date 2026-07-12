@@ -9,6 +9,7 @@
 "./Drivers/OLED_Hardware_I2C/oled_hardware_i2c.o"
 "./Drivers/TrackingModuleIIC/trackingiic.o"
 "./Drivers/Ultrasonic_GPIO/ultrasonic_gpio.o"
+"./Drivers/VisionTracking/vision_tracking.o"
 "./Drivers/WIT/wit.o"
 "./INTERRUPT/interrupt.o"
 "./Move/move.o"
