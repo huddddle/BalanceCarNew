@@ -1,49 +1,53 @@
 #include "bluetooth.h"
-#include <string.h>
+#include "hostcom.h"
 #include <stdio.h>
-#define BT_BUFFER_SIZE 64
+
+static void Bluetooth_WaitAndSend(char type, const char *value, char tag)
+{
+    while (gDMADone_TX == false) {
+    }
+    (void)Host_Send(type, value, tag);
+}
+
+static void Bluetooth_SendScaled(char type, float value)
+{
+    char encoded[16];
+    long scaled = (long)(value * 100.0f);
+
+    if (scaled > 99999L) {
+        scaled = 99999L;
+    } else if (scaled < -99999L) {
+        scaled = -99999L;
+    }
+
+    snprintf(encoded, sizeof(encoded), "%+06ld", scaled);
+    Bluetooth_WaitAndSend(type, encoded, 'D');
+}
 
 void Bluetooth_Init(void)
 {
-    // SysConfig 的 SYSCFG_DL_init() 已经把 UART 外设初始化好了
-    // 只需要发送
-    // 留空，保持接口的完整性。
 }
 
-/**
- * @brief 发送带有长度限制的自定义字符串
- * @param str 要发送的字符串
- * @param max_len 限制的最大发送长度 (防止溢出卡死)
- */
-void Bluetooth_SendString(const char *str, uint16_t max_len)
+void Bluetooth_SendString(const char *text, uint16_t max_len)
 {
-    if (str == NULL || max_len == 0) return;
-    
-    uint16_t count = 0;
-    
-    // 遇到结束符 '\0' 或 达到最大长度时停止发送
-    while (*str != '\0' && count < max_len) 
-    {
-        // 阻塞发送单个字节（如果串口正在发，会等待发完这个字节）
-        DL_UART_transmitDataBlocking(UART_BT_INST, (uint8_t)(*str));
-        str++;
-        count++;
+    uint16_t index = 0U;
+    char encoded[7];
+
+    if (text == NULL) {
+        return;
+    }
+
+    while ((text[index] != '\0') && (index < max_len)) {
+        snprintf(encoded, sizeof(encoded), "+%05u",
+            (unsigned)(uint8_t)text[index]);
+        Bluetooth_WaitAndSend('S', encoded,
+            (text[index + 1U] == '\0') ? 'E' : 'C');
+        index++;
     }
 }
 
-
-/**
- * @brief 发送题目要求的数据格式
- */
-void Bluetooth_SendData(float l1, float l2)
+void Bluetooth_SendData(float value1, float value2)
 {
-    char buffer[BT_BUFFER_SIZE];
-    
-    // 把浮点数格式化进 buffer
-    snprintf(buffer, sizeof(buffer), "l1=%.2f, l2=%.2f\r\n", l1, l2);
-    
-    // 调用上面写的限制长度的函数，防止格式化出错时无限发送
-    Bluetooth_SendString(buffer, BT_BUFFER_SIZE);
+    Bluetooth_SendScaled('1', value1);
+    Bluetooth_SendScaled('2', value2);
 }
-
-

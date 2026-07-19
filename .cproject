@@ -52,6 +52,9 @@
                                     <listOptionValue value="${PROJECT_ROOT}/IRTRACKING"/>
                                     <listOptionValue value="${PROJECT_ROOT}/UART"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Hostcom"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/GBControl"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Bluetooth"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>
@@ -60,12 +63,13 @@
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/BNO08X_UART_RVC"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Ultrasonic_GPIO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Ultrasonic_Capture"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/GBControl"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/TrackingMoudleIIC"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Hardware_I2C"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Hardware_SPI"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Software_I2C"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Software_SPI"/>
-                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Bluetooth"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Hostcom"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/MPU6050"/>
                                     <listOptionValue value="${PROJECT_ROOT}/PID"/>
                                     <listOptionValue value="${PROJECT_ROOT}/INTERRUPT/"/>
@@ -173,7 +177,6 @@
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/VisionTracking"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SERVO"/>
                                     <listOptionValue value="${PROJECT_ROOT}/SPEED"/>
-                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Bluetooth"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/WIT"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Irtracking"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Motor"/>
@@ -182,7 +185,6 @@
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/Ultrasonic_Capture"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Hardware_I2C"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Hardware_SPI"/>
-                                    <listOptionValue value="${PROJECT_ROOT}/Drivers/Bluetooth"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Software_I2C"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/OLED_Software_SPI"/>
                                     <listOptionValue value="${PROJECT_ROOT}/Drivers/MPU6050"/>

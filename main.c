@@ -46,6 +46,7 @@
 #include "wit.h"
 #include "trackingiic.h"
 #include "vision_tracking.h"
+#include "control.h"
 
 uint8_t oled_buffer[64];
 volatile uint8_t gEchoData = 0;
@@ -63,6 +64,14 @@ int main(void)
 {
   SYSCFG_DL_init();
   SysTick_Init();
+  Gimbal_Init(); // PA8/PA9 F32C gimbal initialization
+
+  /* Stop both gimbal axes before starting the other peripherals. */
+  BLDC_SetSpeed(BLDC_ADDR_1, 0);
+  mspm0_delay_ms(10);
+  BLDC_SetSpeed(BLDC_ADDR_2, 0);
+  mspm0_delay_ms(10);
+
 
   OLED_Init(); // 屏幕初始化
   WIT_Init();  // 陀螺仪初始化
@@ -76,16 +85,17 @@ int main(void)
   Left_Control(1, 0);
   Right_Control(1, 0);
 
-
   //运动圈数初始化
   AssignmentChoose();
 
   //视觉寻迹串口初始化 + OLED显示视觉数据(绘制静态标签)
   Vision_Init();
 
+
   while (1)
   {
     trackSensorUpdate();
+    Vision_Update();
 
     // 把接收到的视觉数据显示在OLED上(原始帧 / 误差 / 数据 / 帧计数)
     Vision_ShowOLED();

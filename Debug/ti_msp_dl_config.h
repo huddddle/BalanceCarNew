@@ -174,46 +174,52 @@ extern "C" {
 #define UART_WIT_BAUD_RATE                                              (115200)
 #define UART_WIT_IBRD_40_MHZ_115200_BAUD                                    (21)
 #define UART_WIT_FBRD_40_MHZ_115200_BAUD                                    (45)
-/* Defines for UART_BT */
-#define UART_BT_INST                                                       UART1
-#define UART_BT_INST_FREQUENCY                                          40000000
-#define UART_BT_INST_IRQHandler                                 UART1_IRQHandler
-#define UART_BT_INST_INT_IRQN                                     UART1_INT_IRQn
-#define GPIO_UART_BT_RX_PORT                                               GPIOA
-#define GPIO_UART_BT_TX_PORT                                               GPIOA
-#define GPIO_UART_BT_RX_PIN                                        DL_GPIO_PIN_9
-#define GPIO_UART_BT_TX_PIN                                        DL_GPIO_PIN_8
-#define GPIO_UART_BT_IOMUX_RX                                    (IOMUX_PINCM20)
-#define GPIO_UART_BT_IOMUX_TX                                    (IOMUX_PINCM19)
-#define GPIO_UART_BT_IOMUX_RX_FUNC                     IOMUX_PINCM20_PF_UART1_RX
-#define GPIO_UART_BT_IOMUX_TX_FUNC                     IOMUX_PINCM19_PF_UART1_TX
-#define UART_BT_BAUD_RATE                                                 (9600)
-#define UART_BT_IBRD_40_MHZ_9600_BAUD                                      (260)
-#define UART_BT_FBRD_40_MHZ_9600_BAUD                                       (27)
-/* Defines for UART_VISION */
-#define UART_VISION_INST                                                   UART3
-#define UART_VISION_INST_FREQUENCY                                      80000000
-#define UART_VISION_INST_IRQHandler                             UART3_IRQHandler
-#define UART_VISION_INST_INT_IRQN                                 UART3_INT_IRQn
-#define GPIO_UART_VISION_RX_PORT                                           GPIOA
-#define GPIO_UART_VISION_TX_PORT                                           GPIOA
-#define GPIO_UART_VISION_RX_PIN                                   DL_GPIO_PIN_25
-#define GPIO_UART_VISION_TX_PIN                                   DL_GPIO_PIN_26
-#define GPIO_UART_VISION_IOMUX_RX                                (IOMUX_PINCM55)
-#define GPIO_UART_VISION_IOMUX_TX                                (IOMUX_PINCM59)
-#define GPIO_UART_VISION_IOMUX_RX_FUNC                 IOMUX_PINCM55_PF_UART3_RX
-#define GPIO_UART_VISION_IOMUX_TX_FUNC                 IOMUX_PINCM59_PF_UART3_TX
-#define UART_VISION_BAUD_RATE                                           (115200)
-#define UART_VISION_IBRD_80_MHZ_115200_BAUD                                 (43)
-#define UART_VISION_FBRD_80_MHZ_115200_BAUD                                 (26)
+/* Defines for UART_GIMBAL */
+#define UART_GIMBAL_INST                                                   UART1
+#define UART_GIMBAL_INST_FREQUENCY                                      40000000
+#define UART_GIMBAL_INST_IRQHandler                             UART1_IRQHandler
+#define UART_GIMBAL_INST_INT_IRQN                                 UART1_INT_IRQn
+#define GPIO_UART_GIMBAL_RX_PORT                                           GPIOA
+#define GPIO_UART_GIMBAL_TX_PORT                                           GPIOA
+#define GPIO_UART_GIMBAL_RX_PIN                                    DL_GPIO_PIN_9
+#define GPIO_UART_GIMBAL_TX_PIN                                    DL_GPIO_PIN_8
+#define GPIO_UART_GIMBAL_IOMUX_RX                                (IOMUX_PINCM20)
+#define GPIO_UART_GIMBAL_IOMUX_TX                                (IOMUX_PINCM19)
+#define GPIO_UART_GIMBAL_IOMUX_RX_FUNC                 IOMUX_PINCM20_PF_UART1_RX
+#define GPIO_UART_GIMBAL_IOMUX_TX_FUNC                 IOMUX_PINCM19_PF_UART1_TX
+#define UART_GIMBAL_BAUD_RATE                                           (115200)
+#define UART_GIMBAL_IBRD_40_MHZ_115200_BAUD                                 (21)
+#define UART_GIMBAL_FBRD_40_MHZ_115200_BAUD                                 (45)
+/* Defines for UART_0 */
+#define UART_0_INST                                                        UART3
+#define UART_0_INST_FREQUENCY                                           80000000
+#define UART_0_INST_IRQHandler                                  UART3_IRQHandler
+#define UART_0_INST_INT_IRQN                                      UART3_INT_IRQn
+#define GPIO_UART_0_RX_PORT                                                GPIOA
+#define GPIO_UART_0_TX_PORT                                                GPIOA
+#define GPIO_UART_0_RX_PIN                                        DL_GPIO_PIN_25
+#define GPIO_UART_0_TX_PIN                                        DL_GPIO_PIN_26
+#define GPIO_UART_0_IOMUX_RX                                     (IOMUX_PINCM55)
+#define GPIO_UART_0_IOMUX_TX                                     (IOMUX_PINCM59)
+#define GPIO_UART_0_IOMUX_RX_FUNC                      IOMUX_PINCM55_PF_UART3_RX
+#define GPIO_UART_0_IOMUX_TX_FUNC                      IOMUX_PINCM59_PF_UART3_TX
+#define UART_0_BAUD_RATE                                                (115200)
+#define UART_0_IBRD_80_MHZ_115200_BAUD                                      (43)
+#define UART_0_FBRD_80_MHZ_115200_BAUD                                      (26)
 
 
 
 
 
 /* Defines for DMA_WIT */
-#define DMA_WIT_CHAN_ID                                                      (0)
+#define DMA_WIT_CHAN_ID                                                      (2)
 #define UART_WIT_INST_DMA_TRIGGER                            (DMA_UART0_RX_TRIG)
+/* Defines for DMA_CH1 */
+#define DMA_CH1_CHAN_ID                                                      (1)
+#define UART_0_INST_DMA_TRIGGER_0                            (DMA_UART3_TX_TRIG)
+/* Defines for DMA_CH0 */
+#define DMA_CH0_CHAN_ID                                                      (0)
+#define UART_0_INST_DMA_TRIGGER_1                            (DMA_UART3_RX_TRIG)
 
 
 /* Port definition for Pin Group LED */
@@ -343,8 +349,8 @@ void SYSCFG_DL_TIMER_ULTRASONIC_init(void);
 void SYSCFG_DL_TIMER_Balance_init(void);
 void SYSCFG_DL_I2C_OLED_init(void);
 void SYSCFG_DL_UART_WIT_init(void);
-void SYSCFG_DL_UART_BT_init(void);
-void SYSCFG_DL_UART_VISION_init(void);
+void SYSCFG_DL_UART_GIMBAL_init(void);
+void SYSCFG_DL_UART_0_init(void);
 void SYSCFG_DL_DMA_init(void);
 
 

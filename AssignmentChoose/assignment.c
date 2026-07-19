@@ -13,7 +13,7 @@
 #include "assignment.h"
 #include "move.h"
 #include "bluetooth.h"
-
+#include "control.h"
 
 
 static SoftTimer_t Assitimer = {0, false};
@@ -198,10 +198,47 @@ void assignment5(void)
   }
 }
 
-// 如果一直没有任务就空转
-void assignment0(void) {
+// 云台角度测试：1 号电机在 90.0° 和 120.0° 之间往返。
+void assignment0(void)
+{
+  static uint8_t initialized = 0U;
+  static uint8_t move_to_point_b = 1U;
+  static unsigned long last_move_ms = 0UL;
+  const uint16_t point_a_x10 = 900U;
+  const uint16_t point_b_x10 = 1200U;
 
-  OLED_ShowString(10, 6, (uint8_t *)"Completed", 8);
+  if (initialized == 0U)
+  {
+    /* 先停止两个轴，再将 1 号电机切换到单圈位置模式。 */
+    BLDC_SetSpeed(BLDC_ADDR_1, 0);
+    mspm0_delay_ms(10);
+    BLDC_SetSpeed(BLDC_ADDR_2, 0);
+    mspm0_delay_ms(10);
+    BLDC_SetMode(BLDC_ADDR_1, MODE_SINGLE_POS);
+    mspm0_delay_ms(1);
+    BLDC_SetSingleAngle(BLDC_ADDR_1, point_a_x10);
+
+    last_move_ms = tick_ms;
+    initialized = 1U;
+    return;
+  }
+
+  /* 使用 SysTick 做非阻塞计时，不影响主循环的视觉和传感器更新。 */
+  if ((unsigned long)(tick_ms - last_move_ms) >= 500UL)
+  {
+    if (move_to_point_b != 0U)
+    {
+      BLDC_SetSingleAngle(BLDC_ADDR_1, point_b_x10);
+      move_to_point_b = 0U;
+    }
+    else
+    {
+      BLDC_SetSingleAngle(BLDC_ADDR_1, point_a_x10);
+      move_to_point_b = 1U;
+    }
+
+    last_move_ms = tick_ms;
+  }
 }
 
 void LightAndSound(void)

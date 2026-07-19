@@ -121,6 +121,7 @@ SUBDIRS := \
 . \
 AssignmentChoose \
 Drivers/Bluetooth \
+Drivers/GBControl \
 Drivers/MSPM0 \
 Drivers/Motor \
 Drivers/OLED_Hardware_I2C \

@@ -95,7 +95,9 @@ AssignmentChoose/assignment.o: ../AssignmentChoose/assignment.c \
  D:/Electric/My_TI_Workspace/BalanceCarNew/SPEED/speed.h \
  D:/Electric/My_TI_Workspace/BalanceCarNew/TURN/turn.h \
  ../AssignmentChoose/assignment.h \
- D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/Bluetooth/bluetooth.h
+ D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/Bluetooth/bluetooth.h \
+ D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/GBControl/control.h \
+ D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/GBControl/DataScope_DP.h
 D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/Motor/Motor.h:
 ti_msp_dl_config.h:
 C:/TI/mspm0_sdk_2_04_00_06/source/ti/devices/msp/msp.h:
@@ -191,3 +193,5 @@ D:/Electric/My_TI_Workspace/BalanceCarNew/SPEED/speed.h:
 D:/Electric/My_TI_Workspace/BalanceCarNew/TURN/turn.h:
 ../AssignmentChoose/assignment.h:
 D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/Bluetooth/bluetooth.h:
+D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/GBControl/control.h:
+D:/Electric/My_TI_Workspace/BalanceCarNew/Drivers/GBControl/DataScope_DP.h:

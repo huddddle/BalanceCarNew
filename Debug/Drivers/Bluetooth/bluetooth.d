@@ -1,7 +1,7 @@
 # FIXED
 
 Drivers/Bluetooth/bluetooth.o: ../Drivers/Bluetooth/bluetooth.c \
- ../Drivers/Bluetooth/bluetooth.h \
+ ../Drivers/Bluetooth/bluetooth.h ../Drivers/Bluetooth/hostcom.h \
  ti_msp_dl_config.h \
  C:/TI/mspm0_sdk_2_04_00_06/source/ti/devices/msp/msp.h \
  C:/TI/mspm0_sdk_2_04_00_06/source/ti/devices/DeviceFamily.h \
@@ -77,6 +77,7 @@ Drivers/Bluetooth/bluetooth.o: ../Drivers/Bluetooth/bluetooth.c \
  C:/TI/mspm0_sdk_2_04_00_06/source/ti/driverlib/m0p/dl_interrupt.h \
  C:/TI/mspm0_sdk_2_04_00_06/source/ti/driverlib/m0p/dl_systick.h
 ../Drivers/Bluetooth/bluetooth.h:
+../Drivers/Bluetooth/hostcom.h:
 ti_msp_dl_config.h:
 C:/TI/mspm0_sdk_2_04_00_06/source/ti/devices/msp/msp.h:
 C:/TI/mspm0_sdk_2_04_00_06/source/ti/devices/DeviceFamily.h:
